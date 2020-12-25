@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:id="@+id/ll_main_out"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:background="@drawable/item_coure"
+        android:gravity="center"
+        android:padding="10dp"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/iv_main_img"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/SouS" />
+
+        <TextView
+            android:id="@+id/tv_main_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="商品搜索,共239款好物"
+            android:textSize="15sp" />
+    </LinearLayout>
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/vp_main_ger"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="5dp"
+        app:layout_constraintBottom_toTopOf="@id/radio"
+        app:layout_constraintTop_toBottomOf="@id/ll_main_out" />
+
+    <RadioGroup
+        android:id="@+id/radio"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#FAFAFA"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <RadioButton
+            android:id="@+id/button_one"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:button="@null"
+            android:checked="true"
+            android:drawableTop="@drawable/item_onclick1"
+            android:gravity="center"
+            android:text="首页"
+            android:textColor="@drawable/item_color" />
+
+        <RadioButton
+            android:id="@+id/button_two"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawableTop="@drawable/item_onclick2"
+            android:gravity="center"
+            android:text="专题"
+            android:textColor="@drawable/item_color" />
+
+        <RadioButton
+            android:id="@+id/button_three"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawableTop="@drawable/item_onclick3"
+            android:gravity="center"
+            android:text="分类"
+            android:textColor="@drawable/item_color" />
+
+        <RadioButton
+            android:id="@+id/button_four"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawableTop="@drawable/item_onclick4"
+            android:gravity="center"
+            android:text="购物车"
+            android:textColor="@drawable/item_color" />
+
+        <RadioButton
+            android:id="@+id/button_five"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawableTop="@drawable/item_onclick5"
+            android:gravity="center"
+            android:text="我的"
+            android:textColor="@drawable/item_color" />
+    </RadioGroup>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,80 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 30
+    buildToolsVersion "30.0.3"
+
+    defaultConfig {
+        applicationId "com.example.vlayoutapplication"
+        minSdkVersion 22
+        targetSdkVersion 30
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+    //GSON解析
+    implementation 'com.google.code.gson:gson:2.2.4'
+
+//侧滑页依赖
+//noinspection GradleCompatible
+    implementation 'com.android.support:design:28.0.0'
+
+//图片加载
+    implementation 'com.github.bumptech.glide:glide:4.8.0'
+
+//轮播图
+    implementation 'com.youth.banner:banner:1.4.10'
+
+//上拉刷新 下拉加载
+    implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.2'
+
+//动态权限
+    implementation 'com.github.dfqin:grantor:2.5'
+
+//okhttp
+    implementation 'com.squareup.okhttp3:okhttp:3.12.0'
+
+//Retrofit
+    implementation 'com.squareup.retrofit2:retrofit:2.5.0'
+
+//数据解析器
+    implementation 'com.squareup.retrofit2:converter-gson:2.2.0'
+
+//dao
+    implementation 'org.greenrobot:greendao:3.3.0'
+
+//广播
+    implementation 'androidx.localbroadcastmanager:localbroadcastmanager:1.0.0'
+
+//EventBus
+    implementation 'org.greenrobot:eventbus:3.1.1'
+
+//RxJava
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.4'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.1.0'
+    implementation 'com.squareup.retrofit2:retrofit:2.5.0'//retrofit 库
+    implementation 'com.squareup.retrofit2:converter-gson:2.5.0'//转换器，请求结果转换成Model
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.5.0'//配合Rxjava 使用
+
+//VirtualLayoutManager
+    implementation ('com.alibaba.android:vlayout:1.2.8@aar') {transitive = true}
+
+}
