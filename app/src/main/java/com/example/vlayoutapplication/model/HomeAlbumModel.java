@@ -4,17 +4,15 @@ import com.example.vlayoutapplication.contract.HomeContract;
 import com.example.vlayoutapplication.util.net.IneterCallBack;
 import com.example.vlayoutapplication.util.net.RetrofitUrils;
 
-public class HomeModel implements HomeContract.CHomeModel{
-    public HomeContract.CHomePresenter presenter;
+public class HomeAlbumModel implements HomeContract.CHomeModel {
+    private HomeContract.CHomePresenter presenter;
 
-    public HomeModel(HomeContract.CHomePresenter presenter) {
+    public HomeAlbumModel(HomeContract.CHomePresenter presenter) {
         this.presenter = presenter;
     }
 
     @Override
     public <T> void getData(String url, IneterCallBack<T> callBack) {
-        //网络请求
         RetrofitUrils.getInstance().get(url,callBack);
-        RetrofitUrils.getInstance().post(url,callBack);
     }
 }

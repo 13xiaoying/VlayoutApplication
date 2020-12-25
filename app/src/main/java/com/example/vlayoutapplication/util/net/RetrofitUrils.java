@@ -59,7 +59,8 @@ public class RetrofitUrils implements InterWorkInterface {
                             Type[] genericInterfaces = callBack.getClass().getGenericInterfaces();
                             Type[] actualTypeArguments = ((ParameterizedType) genericInterfaces[0]).getActualTypeArguments();
                             Type type = actualTypeArguments[0];
-                            T json = new Gson().fromJson(string, type);
+                            Gson gson = new Gson();
+                            T json = gson.fromJson(string, type);
                             callBack.onInit(json);
                         } catch (IOException e) {
                             e.printStackTrace();
@@ -93,11 +94,11 @@ public class RetrofitUrils implements InterWorkInterface {
                     public void onNext(ResponseBody responseBody) {
                         try {
                             String string = responseBody.string();
-
                             Type[] genericInterfaces = callBack.getClass().getGenericInterfaces();
                             Type[] actualTypeArguments = ((ParameterizedType) genericInterfaces[0]).getActualTypeArguments();
                             Type type = actualTypeArguments[0];
-                            T json = new Gson().fromJson(string, type);
+                            Gson gson = new Gson();
+                            T json = gson.fromJson(string, type);
                             callBack.onInit(json);
                         } catch (IOException e) {
                             e.printStackTrace();

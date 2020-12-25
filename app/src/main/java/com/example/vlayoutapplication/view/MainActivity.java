@@ -1,12 +1,10 @@
 package com.example.vlayoutapplication.view;
 
-import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager;
 
@@ -19,9 +17,9 @@ import com.example.vlayoutapplication.fragment.HomeFragment;
 import com.example.vlayoutapplication.fragment.MyFragment;
 import com.example.vlayoutapplication.fragment.ShoppingFragment;
 import com.example.vlayoutapplication.fragment.SortFragment;
-import com.example.vlayoutapplication.presenter.HomePresenter;
+import com.example.vlayoutapplication.presenter.HomeBannerPresenter;
 
-public class MainActivity extends BaseMainActivity<HomePresenter> implements View.OnClickListener, HomeContract.CHomeView {
+public class MainActivity extends BaseMainActivity<HomeBannerPresenter> implements View.OnClickListener, HomeContract.CHomeView {
 
     /**
      * 首页
@@ -84,8 +82,8 @@ public class MainActivity extends BaseMainActivity<HomePresenter> implements Vie
     }
 
     @Override
-    public HomePresenter getInterface() {
-        return new HomePresenter(this);
+    public HomeBannerPresenter getInterface() {
+        return new HomeBannerPresenter(this);
     }
     @Override
     public void initView() {
