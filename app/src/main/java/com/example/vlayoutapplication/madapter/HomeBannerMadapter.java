@@ -8,6 +8,9 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.alibaba.android.vlayout.DelegateAdapter;
+import com.alibaba.android.vlayout.LayoutHelper;
+import com.alibaba.android.vlayout.layout.SingleLayoutHelper;
 import com.bumptech.glide.Glide;
 import com.example.vlayoutapplication.R;
 import com.example.vlayoutapplication.bean.HomeBannerBean;
@@ -16,13 +19,15 @@ import com.youth.banner.loader.ImageLoader;
 
 import java.util.ArrayList;
 
-public class HomeBannerMadapter extends RecyclerView.Adapter {
+public class HomeBannerMadapter extends DelegateAdapter.Adapter {
     private Context context;
     private ArrayList<HomeBannerBean.DataBean.BannerBean> list;
+    private SingleLayoutHelper singleLayoutHelper;
 
-    public HomeBannerMadapter(Context context, ArrayList<HomeBannerBean.DataBean.BannerBean> list) {
+    public HomeBannerMadapter(Context context, ArrayList<HomeBannerBean.DataBean.BannerBean> list, SingleLayoutHelper singleLayoutHelper) {
         this.context = context;
         this.list = list;
+        this.singleLayoutHelper = singleLayoutHelper;
     }
 
     @NonNull
@@ -42,11 +47,22 @@ public class HomeBannerMadapter extends RecyclerView.Adapter {
                 Glide.with(context).load(bannerBean.getImage_url()).into(imageView);
             }
         }).start();
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                iOnclickItem.iOnclick();
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
         return list.size();
+    }
+
+    @Override
+    public LayoutHelper onCreateLayoutHelper() {
+        return singleLayoutHelper;
     }
 
     private class ViewHolder extends RecyclerView.ViewHolder {
@@ -55,5 +71,13 @@ public class HomeBannerMadapter extends RecyclerView.Adapter {
             super(itemView);
             banner=itemView.findViewById(R.id.banner_home);
         }
+    }
+    public interface iOnclickItem{
+        void iOnclick();
+    }
+    iOnclickItem iOnclickItem;
+
+    public void setiOnclickItem(HomeBannerMadapter.iOnclickItem iOnclickItem) {
+        this.iOnclickItem = iOnclickItem;
     }
 }
