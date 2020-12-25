@@ -7,45 +7,12 @@
     tools:context=".fragment.HomeFragment">
 
 
-    <LinearLayout
-        android:id="@+id/ll_home_out"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:background="@drawable/item_coure"
-        android:gravity="center"
-        android:padding="10dp"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <ImageView
-            android:id="@+id/iv_main_img"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:src="@drawable/SouS" />
-
-        <TextView
-            android:id="@+id/tv_main_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:text="商品搜索,共239款好物"
-            android:textSize="15sp" />
-    </LinearLayout>
-
-    <com.youth.banner.Banner
-        android:id="@+id/banner_home"
-        app:layout_constraintTop_toBottomOf="@id/ll_home_out"
-        app:layout_constraintBottom_toTopOf="@id/rv_view_home"
-        android:layout_margin="10dp"
-        android:layout_width="match_parent"
-        android:background="#EE0000"
-        android:layout_height="200dp"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_view_home"
         android:background="@color/colorPrimary"
         android:layout_margin="10dp"
-        app:layout_constraintTop_toBottomOf="@id/banner_home"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_width="match_parent"
         android:layout_height="0dp"/>

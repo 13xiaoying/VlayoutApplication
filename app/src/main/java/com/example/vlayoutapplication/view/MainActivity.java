@@ -1,4 +1,4 @@
-package com.example.vlayoutapplication;
+package com.example.vlayoutapplication.view;
 
 import android.os.Bundle;
 import android.view.View;
@@ -10,13 +10,18 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager;
 
+import com.example.vlayoutapplication.R;
+import com.example.vlayoutapplication.base.BaseMainActivity;
+import com.example.vlayoutapplication.bean.HomeBannerBean;
+import com.example.vlayoutapplication.contract.HomeContract;
 import com.example.vlayoutapplication.fragment.AlbumFragment;
 import com.example.vlayoutapplication.fragment.HomeFragment;
 import com.example.vlayoutapplication.fragment.MyFragment;
 import com.example.vlayoutapplication.fragment.ShoppingFragment;
 import com.example.vlayoutapplication.fragment.SortFragment;
+import com.example.vlayoutapplication.presenter.HomePresenter;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends BaseMainActivity<HomePresenter> implements View.OnClickListener, HomeContract.CHomeView {
 
     /**
      * 首页
@@ -49,14 +54,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private FragmentManager manager;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        initView();
-        initDate();
-    }
-
-    private void initDate() {
+    public void initDate() {
+        presenter.Result();
         homeFragment = new HomeFragment();
         albumFragment = new AlbumFragment();
         myFragment = new MyFragment();
@@ -79,7 +78,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
-    private void initView() {
+    @Override
+    public int getIcount() {
+        return R.layout.activity_main;
+    }
+
+    @Override
+    public HomePresenter getInterface() {
+        return new HomePresenter(this);
+    }
+    @Override
+    public void initView() {
         mLlMainOut = (LinearLayout) findViewById(R.id.ll_main_out);
         mButtonOne = (RadioButton) findViewById(R.id.button_one);
         mButtonTwo = (RadioButton) findViewById(R.id.button_two);
@@ -146,5 +155,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         .commit();
                 break;
         }
+    }
+
+    @Override
+    public void onInit(HomeBannerBean bean) {
+
+    }
+
+    @Override
+    public void onError(String error) {
+
     }
 }

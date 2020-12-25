@@ -14,12 +14,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.alibaba.android.vlayout.VirtualLayoutManager;
 import com.example.vlayoutapplication.R;
+import com.example.vlayoutapplication.bean.HomeBannerBean;
+
+import java.util.ArrayList;
 
 public class HomeFragment extends Fragment {
     private ImageView mMainImgIv;
     private TextView mMainTextTv;
     private LinearLayout mHomeOutLl;
     private RecyclerView mViewHomeRv;
+    private ArrayList<HomeBannerBean.DataBean.BannerBean> list;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -40,6 +44,10 @@ public class HomeFragment extends Fragment {
         mMainTextTv = (TextView) itemView.findViewById(R.id.tv_main_text);
         mHomeOutLl = (LinearLayout) itemView.findViewById(R.id.ll_home_out);
         mViewHomeRv = (RecyclerView) itemView.findViewById(R.id.rv_view_home);
+
+        list = new ArrayList<>();
+        
+
         VirtualLayoutManager virtualLayoutManager = new VirtualLayoutManager(getActivity());
 
         mViewHomeRv.setLayoutManager(virtualLayoutManager);

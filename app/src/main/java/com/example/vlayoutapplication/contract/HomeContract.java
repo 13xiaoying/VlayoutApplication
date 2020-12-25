@@ -6,16 +6,16 @@ import com.example.vlayoutapplication.bean.HomeBannerBean;
 import com.example.vlayoutapplication.util.net.IneterCallBack;
 
 public class HomeContract {
-    public interface HomeModel extends BaseModel {
+    public interface CHomeModel{
         <T> void getData(String url, IneterCallBack<T> callBack);
     }
 
-    public interface HomePresenter {
-        void Result(String s);
+    public interface CHomePresenter {
+        void Result();
     }
 
-    public interface HomeView extends BaseView{
-        void getInit(HomeBannerBean bean);
-        void getError(String error);
+    public interface CHomeView extends BaseView{
+        void onInit(HomeBannerBean bean);
+        void onError(String error);
     }
 }
