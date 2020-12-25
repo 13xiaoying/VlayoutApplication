@@ -10,6 +10,8 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.example.vlayoutapplication.R;
 import com.example.vlayoutapplication.base.BaseMainActivity;
+import com.example.vlayoutapplication.base.BasePresenter;
+import com.example.vlayoutapplication.bean.HomeAlbumBean;
 import com.example.vlayoutapplication.bean.HomeBannerBean;
 import com.example.vlayoutapplication.contract.HomeContract;
 import com.example.vlayoutapplication.fragment.AlbumFragment;
@@ -157,6 +159,11 @@ public class MainActivity extends BaseMainActivity<HomeBannerPresenter> implemen
 
     @Override
     public void onInit(HomeBannerBean bean) {
+
+    }
+
+    @Override
+    public void onInit1(HomeAlbumBean bean) {
 
     }
 

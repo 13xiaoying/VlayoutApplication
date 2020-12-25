@@ -37,23 +37,24 @@ public class HomeFragment extends Fragment implements HomeContract.CHomeView {
     private TextView mMainTextTv;
     private LinearLayout mHomeOutLl;
     private RecyclerView mViewHomeRv;
-    private ArrayList<HomeBannerBean.DataBean.BannerBean> list;
+    private ArrayList<HomeBannerBean.DataBean.BannerBean> bannerlist;
     private SingleLayoutHelper singleLayoutHelper;
     private VirtualLayoutManager virtualLayoutManager;
     private HomeAlbumMadapter homeAlbumMadapter;
     private GridLayoutHelper gridLayoutHelper;
 
-    Handler her=new Handler(){
+    Handler her = new Handler() {
         @Override
         public void handleMessage(@NonNull Message msg) {
             super.handleMessage(msg);
-            if(msg.what==1){
+            if (msg.what == 1) {
                 homeAlbumMadapter.notifyDataSetChanged();
                 homeBannerMadapter.notifyDataSetChanged();
             }
         }
     };
     private HomeBannerMadapter homeBannerMadapter;
+    private ArrayList<HomeAlbumBean.DataBean.CategoryListBean> albumlist;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -67,8 +68,8 @@ public class HomeFragment extends Fragment implements HomeContract.CHomeView {
     }
 
     private void initShju() {
-        HomeAlbumPresenter homeAlbumPresenter = new HomeAlbumPresenter(getActivity());
-        HomeBannerPresenter homeBannerPresenter = new HomeBannerPresenter(getActivity());
+        HomeAlbumPresenter homeAlbumPresenter = new HomeAlbumPresenter((HomeContract.CHomeView) getActivity());
+        HomeBannerPresenter homeBannerPresenter = new HomeBannerPresenter((HomeContract.CHomeView) getActivity());
         homeAlbumPresenter.Result();
         homeBannerPresenter.Result();
     }
@@ -111,16 +112,15 @@ public class HomeFragment extends Fragment implements HomeContract.CHomeView {
 
     private void madapter() {
         //banner适配器
-        homeBannerMadapter = new HomeBannerMadapter(getActivity(), list, singleLayoutHelper);
+        homeBannerMadapter = new HomeBannerMadapter(getActivity(),bannerlist, singleLayoutHelper);
         //album适配器
-        homeAlbumMadapter = new HomeAlbumMadapter(getActivity(), gridLayoutHelper);
+        homeAlbumMadapter = new HomeAlbumMadapter(getActivity(),albumlist, gridLayoutHelper);
         //
 
 
-        DelegateAdapter delegateAdapter = new DelegateAdapter(virtualLayoutManager,true);
+        DelegateAdapter delegateAdapter = new DelegateAdapter(virtualLayoutManager, true);
         delegateAdapter.addAdapter(homeBannerMadapter);
         delegateAdapter.addAdapter(homeAlbumMadapter);
-
 
 
         //布局管理器
@@ -135,7 +135,8 @@ public class HomeFragment extends Fragment implements HomeContract.CHomeView {
         mHomeOutLl = (LinearLayout) itemView.findViewById(R.id.ll_home_out);
         mViewHomeRv = (RecyclerView) itemView.findViewById(R.id.rv_view_home);
 
-        list = new ArrayList<>();
+        bannerlist = new ArrayList<>();
+        albumlist = new ArrayList<>();
 
 
         virtualLayoutManager = new VirtualLayoutManager(getActivity());
@@ -150,12 +151,15 @@ public class HomeFragment extends Fragment implements HomeContract.CHomeView {
     @Override
     public void onInit(HomeBannerBean bean) {
         List<HomeBannerBean.DataBean.BannerBean> banner = bean.getData().getBanner();
-
+        bannerlist.addAll(banner);
+        her.sendEmptyMessage(1);
     }
 
     @Override
     public void onInit1(HomeAlbumBean bean) {
-
+        List<HomeAlbumBean.DataBean.CategoryListBean> categoryList = bean.getData().getCategoryList();
+        albumlist.addAll(categoryList);
+        her.sendEmptyMessage(1);
     }
 
     @Override
