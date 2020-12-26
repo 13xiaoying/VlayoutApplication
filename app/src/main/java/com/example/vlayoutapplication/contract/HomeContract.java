@@ -1,12 +1,13 @@
 package com.example.vlayoutapplication.contract;
 
 import com.example.vlayoutapplication.base.BaseView;
+import com.example.vlayoutapplication.base.IBaseModel;
 import com.example.vlayoutapplication.bean.HomeBannerBean;
 import com.example.vlayoutapplication.util.net.IneterCallBack;
 
 public class HomeContract {
-    public interface CHomeModel{
-        <T> void getData(String url, IneterCallBack<T> callBack);
+    public interface CHomeModel extends IBaseModel {
+         void getData(IneterCallBack<HomeBannerBean> callBack);
     }
 
     public interface CHomePresenter {
@@ -15,7 +16,6 @@ public class HomeContract {
 
     public interface CHomeView extends BaseView{
         void onInit(HomeBannerBean bean);
-        void onInit1(HomeBean bean);
         void onError(String error);
     }
 }

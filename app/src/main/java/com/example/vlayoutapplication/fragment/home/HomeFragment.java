@@ -4,6 +4,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,19 +40,8 @@ public class HomeFragment extends Fragment implements HomeContract.CHomeView {
     private VirtualLayoutManager virtualLayoutManager;
     private HomeAlbumMadapter homeAlbumMadapter;
     private GridLayoutHelper gridLayoutHelper;
-
-    Handler her = new Handler() {
-        @Override
-        public void handleMessage(@NonNull Message msg) {
-            super.handleMessage(msg);
-            if (msg.what == 1) {
-                homeAlbumMadapter.notifyDataSetChanged();
-                homeBannerMadapter.notifyDataSetChanged();
-            }
-        }
-    };
     private HomeBannerMadapter homeBannerMadapter;
-    private ArrayList<HomeBean.DataBean.CategoryListBean> albumlist;
+    private ArrayList<HomeBannerBean.DataBean.ChannelBean> albumlist;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -60,13 +50,7 @@ public class HomeFragment extends Fragment implements HomeContract.CHomeView {
         View inflate = inflater.inflate(R.layout.fragment_home, container, false);
         initView(inflate);
         initDate();
-        initShju();
         return inflate;
-    }
-
-    private void initShju() {
-        HomePresenter homePresenter = new HomePresenter((HomeContract.CHomeView) getActivity());
-        homePresenter.Result();
     }
 
     private void initDate() {
@@ -130,8 +114,13 @@ public class HomeFragment extends Fragment implements HomeContract.CHomeView {
         mHomeOutLl = (LinearLayout) itemView.findViewById(R.id.ll_home_out);
         mViewHomeRv = (RecyclerView) itemView.findViewById(R.id.rv_view_home);
 
-        bannerlist = new ArrayList<>();
-        albumlist = new ArrayList<>();
+        bannerlist = new ArrayList<>();//banner
+        albumlist = new ArrayList<>();//album
+
+
+
+
+
 
         virtualLayoutManager = new VirtualLayoutManager(getActivity());
 
@@ -147,21 +136,14 @@ public class HomeFragment extends Fragment implements HomeContract.CHomeView {
         if (bean!=null){
             List<HomeBannerBean.DataBean.BannerBean> banner = bean.getData().getBanner();
             bannerlist.addAll(banner);
-            her.sendEmptyMessage(1);
-        }
-    }
 
-    @Override
-    public void onInit1(HomeBean bean) {
-        if (bean!=null){
-            List<HomeBean.DataBean.CategoryListBean> categoryList = bean.getData().getCategoryList();
-            albumlist.addAll(categoryList);
-            her.sendEmptyMessage(1);
         }
     }
 
     @Override
     public void onError(String error) {
-
+        Log.i(TAG, "onError: 错误信息"+error);
     }
+
+    private static final String TAG = "HomeFragment";
 }
