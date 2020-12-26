@@ -7,11 +7,11 @@ import com.example.vlayoutapplication.model.HomeBannerModel;
 import com.example.vlayoutapplication.util.net.IneterCallBack;
 import com.example.vlayoutapplication.util.net.UrlContstant;
 
-public class HomeBannerPresenter extends BasePresenter<HomeContract.CHomeView> implements HomeContract.CHomePresenter {
+public class HomePresenter extends BasePresenter<HomeContract.CHomeView> implements HomeContract.CHomePresenter {
 
     private final HomeBannerModel homeBannerModel;
 
-    public HomeBannerPresenter(HomeContract.CHomeView cHomeModel) {
+    public HomePresenter(HomeContract.CHomeView cHomeModel) {
         this.homeBannerModel =new HomeBannerModel(this);
     }
 

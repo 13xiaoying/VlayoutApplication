@@ -1,4 +1,4 @@
-package com.example.vlayoutapplication.fragment;
+package com.example.vlayoutapplication.fragment.shopping;
 
 import android.os.Bundle;
 

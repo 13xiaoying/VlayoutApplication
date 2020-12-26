@@ -10,18 +10,16 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.example.vlayoutapplication.R;
 import com.example.vlayoutapplication.base.BaseMainActivity;
-import com.example.vlayoutapplication.base.BasePresenter;
-import com.example.vlayoutapplication.bean.HomeAlbumBean;
 import com.example.vlayoutapplication.bean.HomeBannerBean;
 import com.example.vlayoutapplication.contract.HomeContract;
-import com.example.vlayoutapplication.fragment.AlbumFragment;
-import com.example.vlayoutapplication.fragment.HomeFragment;
-import com.example.vlayoutapplication.fragment.MyFragment;
-import com.example.vlayoutapplication.fragment.ShoppingFragment;
-import com.example.vlayoutapplication.fragment.SortFragment;
-import com.example.vlayoutapplication.presenter.HomeBannerPresenter;
+import com.example.vlayoutapplication.fragment.album.AlbumFragment;
+import com.example.vlayoutapplication.fragment.home.HomeFragment;
+import com.example.vlayoutapplication.fragment.my.MyFragment;
+import com.example.vlayoutapplication.fragment.shopping.ShoppingFragment;
+import com.example.vlayoutapplication.fragment.sort.SortFragment;
+import com.example.vlayoutapplication.presenter.HomePresenter;
 
-public class MainActivity extends BaseMainActivity<HomeBannerPresenter> implements View.OnClickListener, HomeContract.CHomeView {
+public class MainActivity extends BaseMainActivity<HomePresenter> implements View.OnClickListener, HomeContract.CHomeView {
 
     /**
      * 首页
@@ -84,8 +82,8 @@ public class MainActivity extends BaseMainActivity<HomeBannerPresenter> implemen
     }
 
     @Override
-    public HomeBannerPresenter getInterface() {
-        return new HomeBannerPresenter(this);
+    public HomePresenter getInterface() {
+        return new HomePresenter(this);
     }
     @Override
     public void initView() {
@@ -163,7 +161,7 @@ public class MainActivity extends BaseMainActivity<HomeBannerPresenter> implemen
     }
 
     @Override
-    public void onInit1(HomeAlbumBean bean) {
+    public void onInit1(HomeBean bean) {
 
     }
 

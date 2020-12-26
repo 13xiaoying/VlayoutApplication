@@ -1,4 +1,4 @@
-package com.example.vlayoutapplication.fragment;
+package com.example.vlayoutapplication.fragment.home;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -20,14 +20,11 @@ import com.alibaba.android.vlayout.VirtualLayoutManager;
 import com.alibaba.android.vlayout.layout.GridLayoutHelper;
 import com.alibaba.android.vlayout.layout.SingleLayoutHelper;
 import com.example.vlayoutapplication.R;
-import com.example.vlayoutapplication.bean.HomeAlbumBean;
 import com.example.vlayoutapplication.bean.HomeBannerBean;
 import com.example.vlayoutapplication.contract.HomeContract;
 import com.example.vlayoutapplication.madapter.HomeAlbumMadapter;
 import com.example.vlayoutapplication.madapter.HomeBannerMadapter;
-import com.example.vlayoutapplication.presenter.HomeAlbumPresenter;
-import com.example.vlayoutapplication.presenter.HomeBannerPresenter;
-import com.example.vlayoutapplication.util.net.InterWorkInterface;
+import com.example.vlayoutapplication.presenter.HomePresenter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,7 +51,7 @@ public class HomeFragment extends Fragment implements HomeContract.CHomeView {
         }
     };
     private HomeBannerMadapter homeBannerMadapter;
-    private ArrayList<HomeAlbumBean.DataBean.CategoryListBean> albumlist;
+    private ArrayList<HomeBean.DataBean.CategoryListBean> albumlist;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -68,10 +65,8 @@ public class HomeFragment extends Fragment implements HomeContract.CHomeView {
     }
 
     private void initShju() {
-        HomeAlbumPresenter homeAlbumPresenter = new HomeAlbumPresenter((HomeContract.CHomeView) getActivity());
-        HomeBannerPresenter homeBannerPresenter = new HomeBannerPresenter((HomeContract.CHomeView) getActivity());
-        homeAlbumPresenter.Result();
-        homeBannerPresenter.Result();
+        HomePresenter homePresenter = new HomePresenter((HomeContract.CHomeView) getActivity());
+        homePresenter.Result();
     }
 
     private void initDate() {
@@ -138,7 +133,6 @@ public class HomeFragment extends Fragment implements HomeContract.CHomeView {
         bannerlist = new ArrayList<>();
         albumlist = new ArrayList<>();
 
-
         virtualLayoutManager = new VirtualLayoutManager(getActivity());
 
         // 设置组件复用回收池
@@ -150,16 +144,20 @@ public class HomeFragment extends Fragment implements HomeContract.CHomeView {
 
     @Override
     public void onInit(HomeBannerBean bean) {
-        List<HomeBannerBean.DataBean.BannerBean> banner = bean.getData().getBanner();
-        bannerlist.addAll(banner);
-        her.sendEmptyMessage(1);
+        if (bean!=null){
+            List<HomeBannerBean.DataBean.BannerBean> banner = bean.getData().getBanner();
+            bannerlist.addAll(banner);
+            her.sendEmptyMessage(1);
+        }
     }
 
     @Override
-    public void onInit1(HomeAlbumBean bean) {
-        List<HomeAlbumBean.DataBean.CategoryListBean> categoryList = bean.getData().getCategoryList();
-        albumlist.addAll(categoryList);
-        her.sendEmptyMessage(1);
+    public void onInit1(HomeBean bean) {
+        if (bean!=null){
+            List<HomeBean.DataBean.CategoryListBean> categoryList = bean.getData().getCategoryList();
+            albumlist.addAll(categoryList);
+            her.sendEmptyMessage(1);
+        }
     }
 
     @Override

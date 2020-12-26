@@ -1,4 +1,4 @@
-package com.example.vlayoutapplication.fragment;
+package com.example.vlayoutapplication.fragment.album;
 
 import android.os.Bundle;
 

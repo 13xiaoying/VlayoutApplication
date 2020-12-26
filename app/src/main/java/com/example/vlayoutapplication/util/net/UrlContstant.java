@@ -5,9 +5,9 @@ public class UrlContstant {
     //banner
     public static String bannerurl=baseurl+"api/index";
     //album
-    public static String albumurl=baseurl+"api/catalog/index";
+    //public static String albumurl=baseurl+"api/catalog/index";
     //
-    public static String w=baseurl+"api/catalog/index";
+    //public static String w=baseurl+"api/catalog/index";
 
 
 
