@@ -24,6 +24,8 @@ import com.example.vlayoutapplication.madapter.HomeAlbumMadapter;
 import com.example.vlayoutapplication.madapter.HomeBannerMadapter;
 import com.example.vlayoutapplication.madapter.HomeBrandImgMadapter;
 import com.example.vlayoutapplication.madapter.HomeBrandTextMadapter;
+import com.example.vlayoutapplication.madapter.HomeGoodImgMadapter;
+import com.example.vlayoutapplication.madapter.HomeGoodTextMadapter;
 import com.example.vlayoutapplication.madapter.HomeSeekMadapter;
 import com.example.vlayoutapplication.presenter.HomePresenter;
 
@@ -44,6 +46,9 @@ public class HomeFragment extends BaseHomeFragment<HomePresenter> implements Hom
     private HomeAlbumMadapter homeAlbumMadapter;
     private HomeBannerMadapter homeBannerMadapter;
     private HomeSeekMadapter homeSeekMadapter;
+    private ArrayList<HomeBannerBean.DataBean.NewGoodsListBean> goodlist;
+    private HomeGoodImgMadapter homeGoodImgMadapter;
+    private HomeGoodTextMadapter homeGoodTextMadapter;
 
     @Override
     public void initView(@NonNull final View itemView) {
@@ -55,6 +60,8 @@ public class HomeFragment extends BaseHomeFragment<HomePresenter> implements Hom
         bannerlist = new ArrayList<>();//banner
         albumlist = new ArrayList<>();//album
         brandlist = new ArrayList<>();//brand
+        goodlist = new ArrayList<>();//goodlist
+
 
 
         virtualLayoutManager = new VirtualLayoutManager(getActivity());
@@ -152,7 +159,7 @@ public class HomeFragment extends BaseHomeFragment<HomePresenter> implements Hom
         //gridLayoutHelperbrand.setSpanCount(2);
         //brand适配器图片
         gridLayoutHelpergood.setAutoExpand(true);
-        homeBrandImgMadapter = new HomeBrandImgMadapter(getActivity(), brandlist, gridLayoutHelpergood);
+        homeGoodImgMadapter = new HomeGoodImgMadapter(getActivity(), goodlist, gridLayoutHelpergood);
     }
 
     private void goodText() {
@@ -161,8 +168,8 @@ public class HomeFragment extends BaseHomeFragment<HomePresenter> implements Hom
         singleLayoutHelperbrand.setAspectRatio(6);
         singleLayoutHelperbrand.setMarginTop(6);
         //brand适配器文字
-        String text = "品牌制造商直供";
-        homeBrandTextMadapter = new HomeBrandTextMadapter(getActivity(), text,brandlist, singleLayoutHelperbrand);
+        String text = "周一周四·新品首发";
+        homeGoodTextMadapter = new HomeGoodTextMadapter(getActivity(), goodlist, text, singleLayoutHelperbrand);
     }
 
     private void brandText() {
@@ -258,7 +265,9 @@ public class HomeFragment extends BaseHomeFragment<HomePresenter> implements Hom
 
         delegateAdapter.addAdapter(homeBrandImgMadapter);
 
+        delegateAdapter.addAdapter(homeGoodTextMadapter);
 
+        delegateAdapter.addAdapter(homeGoodImgMadapter);
 
         //布局管理器
 //        mViewHomeRv.setLayoutManager(virtualLayoutManager);
@@ -285,6 +294,12 @@ public class HomeFragment extends BaseHomeFragment<HomePresenter> implements Hom
             homeBrandImgMadapter.notifyDataSetChanged();
             homeBrandTextMadapter.notifyDataSetChanged();
 
+            List<HomeBannerBean.DataBean.NewGoodsListBean> newGoodsList = bean.getData().getNewGoodsList();
+            goodlist.addAll(newGoodsList);
+            homeGoodImgMadapter.notifyDataSetChanged();
+            homeGoodImgMadapter.notifyDataSetChanged();
+
+            
 
         }
     }

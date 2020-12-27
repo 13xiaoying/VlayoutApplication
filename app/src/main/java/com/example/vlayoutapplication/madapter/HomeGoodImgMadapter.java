@@ -20,12 +20,12 @@ import java.util.ArrayList;
 
 public class HomeGoodImgMadapter extends DelegateAdapter.Adapter {
     private Context context;
-    private ArrayList<HomeBannerBean.DataBean.ChannelBean> albumlist;
+    private ArrayList<HomeBannerBean.DataBean.NewGoodsListBean> goodlist;
     private LayoutHelper layoutHelper;
 
-    public HomeGoodImgMadapter(Context context, ArrayList<HomeBannerBean.DataBean.ChannelBean> albumlist, LayoutHelper layoutHelper) {
+    public HomeGoodImgMadapter(Context context, ArrayList<HomeBannerBean.DataBean.NewGoodsListBean> goodlist, LayoutHelper layoutHelper) {
         this.context = context;
-        this.albumlist = albumlist;
+        this.goodlist = goodlist;
         this.layoutHelper = layoutHelper;
     }
 
@@ -37,30 +37,37 @@ public class HomeGoodImgMadapter extends DelegateAdapter.Adapter {
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View inflate = LayoutInflater.from(context).inflate(R.layout.item_album, parent, false);
+        View inflate = LayoutInflater.from(context).inflate(R.layout.item_good_img, parent, false);
         return new ViewHolder(inflate);
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        HomeBannerBean.DataBean.ChannelBean channelBean = albumlist.get(position);
+        HomeBannerBean.DataBean.NewGoodsListBean newGoodsListBean = goodlist.get(position);
         ViewHolder viewHolder= (ViewHolder) holder;
-        viewHolder.text_album.setText(channelBean.getName());
-        Glide.with(context).load(channelBean.getIcon_url()).into(viewHolder.img_album);
+        viewHolder.text_good_weight.setText(newGoodsListBean.getName());
+        viewHolder.text_good_price.setText(newGoodsListBean.getRetail_price());
+        Glide.with(context).load(newGoodsListBean.getList_pic_url()).into(viewHolder.img_good);
     }
 
     @Override
     public int getItemCount() {
-        return albumlist.size();
+        if(goodlist.size()>0){
+            return goodlist.size();
+        }else{
+            return 0;
+        }
     }
 
     private class ViewHolder extends RecyclerView.ViewHolder {
-        ImageView img_album;
-        TextView text_album;
+        ImageView img_good;
+        TextView text_good_weight;
+        TextView text_good_price;
         public ViewHolder(View inflate) {
             super(inflate);
-            img_album=inflate.findViewById(R.id.iv_album);
-            text_album=inflate.findViewById(R.id.tv_album);
+            img_good=inflate.findViewById(R.id.iv_good);
+            text_good_weight=inflate.findViewById(R.id.tv_good_weight);
+            text_good_price=inflate.findViewById(R.id.tv_good_price);
         }
     }
 }
