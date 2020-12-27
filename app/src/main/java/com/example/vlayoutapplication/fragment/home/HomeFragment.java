@@ -1,6 +1,5 @@
 package com.example.vlayoutapplication.fragment.home;
 
-import android.graphics.Color;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -14,21 +13,28 @@ import com.alibaba.android.vlayout.DelegateAdapter;
 import com.alibaba.android.vlayout.VirtualLayoutManager;
 import com.alibaba.android.vlayout.layout.ColumnLayoutHelper;
 import com.alibaba.android.vlayout.layout.GridLayoutHelper;
-import com.alibaba.android.vlayout.layout.LinearLayoutHelper;
 import com.alibaba.android.vlayout.layout.SingleLayoutHelper;
 import com.example.vlayoutapplication.R;
 import com.example.vlayoutapplication.base.BaseHomeFragment;
 import com.example.vlayoutapplication.bean.HomeBannerBean;
 import com.example.vlayoutapplication.contract.HomeContract;
 import com.example.vlayoutapplication.madapter.HomeAlbumMadapter;
+import com.example.vlayoutapplication.madapter.HomeBadyMadapter;
 import com.example.vlayoutapplication.madapter.HomeBannerMadapter;
 import com.example.vlayoutapplication.madapter.HomeBrandImgMadapter;
 import com.example.vlayoutapplication.madapter.HomeBrandTextMadapter;
+import com.example.vlayoutapplication.madapter.HomeClothingMadapter;
+import com.example.vlayoutapplication.madapter.HomeDietMadapter;
 import com.example.vlayoutapplication.madapter.HomeGoodImgMadapter;
 import com.example.vlayoutapplication.madapter.HomeGoodTextMadapter;
 import com.example.vlayoutapplication.madapter.HomeHotGoodsImgMadapter;
 import com.example.vlayoutapplication.madapter.HomeHotGoodsTextMadapter;
+import com.example.vlayoutapplication.madapter.HomeHouseMadapter;
+import com.example.vlayoutapplication.madapter.HomeKitchenMadapter;
+import com.example.vlayoutapplication.madapter.HomePartsMadapter;
 import com.example.vlayoutapplication.madapter.HomeSeekMadapter;
+import com.example.vlayoutapplication.madapter.HomeTopicImgMadapter;
+import com.example.vlayoutapplication.madapter.HomeTopicTextMadapter;
 import com.example.vlayoutapplication.presenter.HomePresenter;
 
 import java.util.ArrayList;
@@ -54,6 +60,27 @@ public class HomeFragment extends BaseHomeFragment<HomePresenter> implements Hom
     private ArrayList<HomeBannerBean.DataBean.HotGoodsListBean> hotgoodslist;
     private HomeHotGoodsImgMadapter homeHotGoodsImgMadapter;
     private HomeHotGoodsTextMadapter homeHotGoodsTextMadapter;
+    private ArrayList<HomeBannerBean.DataBean.TopicListBean> topiclist;
+    private HomeTopicImgMadapter homeTopicImgMadapter;
+    private HomeTopicTextMadapter homeTopicTextMadapter;
+    private ArrayList<HomeBannerBean.DataBean.CategoryListBean.GoodsListBean> houselist;
+    private HomeHouseMadapter homeHouseMadapter;
+    private ArrayList<HomeBannerBean.DataBean.CategoryListBean.GoodsListBean> kitchenlist;
+    private ArrayList<HomeBannerBean.DataBean.CategoryListBean.GoodsListBean> dietlist;
+    private ArrayList<HomeBannerBean.DataBean.CategoryListBean.GoodsListBean> partslist;
+    private ArrayList<HomeBannerBean.DataBean.CategoryListBean.GoodsListBean> clothinglist;
+    private ArrayList<HomeBannerBean.DataBean.CategoryListBean.GoodsListBean> badylist;
+    private HomeKitchenMadapter homeKitchenMadapter;
+    private HomeBadyMadapter homeBadyMadapter;
+    private HomeClothingMadapter homeClothingMadapter;
+    private HomePartsMadapter homePartsMadapter;
+    private HomeTopicTextMadapter homeDietTextMadapter;
+    private HomeDietMadapter homeDietMadapter;
+    private HomeTopicTextMadapter homeClothingTextMadapter;
+    private HomeTopicTextMadapter homePartsTextMadapter;
+    private HomeTopicTextMadapter homeKitchenTextMadapter;
+    private HomeTopicTextMadapter homeHouseTextMadapter;
+    private HomeTopicTextMadapter homeBadyTextMadapter;
 
     @Override
     public void initView(@NonNull final View itemView) {
@@ -67,6 +94,13 @@ public class HomeFragment extends BaseHomeFragment<HomePresenter> implements Hom
         brandlist = new ArrayList<>();//brand
         goodlist = new ArrayList<>();//goodlist
         hotgoodslist = new ArrayList<>();//hotgoods
+        topiclist = new ArrayList<>();//topic
+        houselist = new ArrayList<>();//house
+        kitchenlist = new ArrayList<>();//kitchen
+        dietlist = new ArrayList<>();//diet
+        partslist = new ArrayList<>();//parts
+        clothinglist = new ArrayList<>();//clothing
+        badylist = new ArrayList<>();//bady
 
 
         virtualLayoutManager = new VirtualLayoutManager(getActivity());
@@ -92,9 +126,16 @@ public class HomeFragment extends BaseHomeFragment<HomePresenter> implements Hom
         goodImg();
         hotgoodText();
         hotgoodImg();
-        TopicImg();
-        TopicText();
-        //singleLayoutHelper.setItemCount(3);// 设置布局里Item个数
+        //TopicImg();
+        //TopicText();
+        house();
+        kitchen();
+        diet();
+        parts();
+        clothing();
+        bady();
+
+         /*//singleLayoutHelper.setItemCount(3);// 设置布局里Item个数
         //singleLayoutHelper.setPadding(20, 20, 20, 20);// 设置LayoutHelper的子元素相对LayoutHelper边缘的距离
         //singleLayoutHelper.setMargin(20, 20, 20, 20);// 设置LayoutHelper边缘相对父控件（即RecyclerView）的距离
         //singleLayoutHelper.setBgColor(Color.GRAY);// 设置背景颜色
@@ -102,9 +143,9 @@ public class HomeFragment extends BaseHomeFragment<HomePresenter> implements Hom
 
 
         //columnLayoutHelper特有属性
-        //columnLayoutHelper.setWeights(new float[]{20, 20, 20,20,20});// 设置该行每个Item占该行总宽度的比例*/
+        //columnLayoutHelper.setWeights(new float[]{20, 20, 20,20,20});// 设置该行每个Item占该行总宽度的比例
 
-        /*//设置线性布局
+       //设置线性布局
         linearLayoutHelper = new LinearLayoutHelper();
         linearLayoutHelper.setItemCount(5);// 设置布局里Item个数
         linearLayoutHelper.setPadding(10,10,10,10);// 设置LayoutHelper的子元素相对LayoutHelper边缘的距离
@@ -143,18 +184,118 @@ public class HomeFragment extends BaseHomeFragment<HomePresenter> implements Hom
         madapter();
     }
 
+    private void bady() {
+        SingleLayoutHelper singleLayoutHelpertopic = new SingleLayoutHelper();
+        singleLayoutHelpertopic.setItemCount(1);
+        singleLayoutHelpertopic.setAspectRatio(6);
+        singleLayoutHelpertopic.setMarginTop(6);
+        //brand适配器文字
+        String text = "婴童";
+        homeBadyTextMadapter = new HomeTopicTextMadapter(getActivity(), topiclist, text, singleLayoutHelpertopic);
+
+        GridLayoutHelper gridLayoutHelpergood = new GridLayoutHelper(2);
+        // 设置布局里Item个数
+        gridLayoutHelpergood.setItemCount(2);
+        gridLayoutHelpergood.setAutoExpand(true);
+        homeBadyMadapter = new HomeBadyMadapter(getActivity(), badylist, gridLayoutHelpergood);
+    }
+
+    private void clothing() {
+        SingleLayoutHelper singleLayoutHelpertopic = new SingleLayoutHelper();
+        singleLayoutHelpertopic.setItemCount(1);
+        singleLayoutHelpertopic.setAspectRatio(6);
+        singleLayoutHelpertopic.setMarginTop(6);
+        //brand适配器文字
+        String text = "服装";
+        homeClothingTextMadapter = new HomeTopicTextMadapter(getActivity(), topiclist, text, singleLayoutHelpertopic);
+
+        GridLayoutHelper gridLayoutHelpergood = new GridLayoutHelper(2);
+        // 设置布局里Item个数
+        gridLayoutHelpergood.setItemCount(4);
+        gridLayoutHelpergood.setAutoExpand(true);
+        homeClothingMadapter = new HomeClothingMadapter(getActivity(), clothinglist, gridLayoutHelpergood);
+    }
+
+    private void parts() {
+        SingleLayoutHelper singleLayoutHelpertopic = new SingleLayoutHelper();
+        singleLayoutHelpertopic.setItemCount(1);
+        singleLayoutHelpertopic.setAspectRatio(6);
+        singleLayoutHelpertopic.setMarginTop(6);
+        //brand适配器文字
+        String text = "配件";
+        homePartsTextMadapter = new HomeTopicTextMadapter(getActivity(), topiclist, text, singleLayoutHelpertopic);
+
+        GridLayoutHelper gridLayoutHelpergood = new GridLayoutHelper(2);
+        // 设置布局里Item个数
+        gridLayoutHelpergood.setItemCount(4);
+        gridLayoutHelpergood.setAutoExpand(true);
+        homePartsMadapter = new HomePartsMadapter(getActivity(), partslist, gridLayoutHelpergood);
+    }
+
+    private void diet() {
+        SingleLayoutHelper singleLayoutHelpertopic = new SingleLayoutHelper();
+        singleLayoutHelpertopic.setItemCount(1);
+        singleLayoutHelpertopic.setAspectRatio(6);
+        singleLayoutHelpertopic.setMarginTop(6);
+        //brand适配器文字
+        String text = "饮品";
+        homeDietTextMadapter = new HomeTopicTextMadapter(getActivity(), topiclist, text, singleLayoutHelpertopic);
+
+        GridLayoutHelper gridLayoutHelpergood = new GridLayoutHelper(2);
+        // 设置布局里Item个数
+        gridLayoutHelpergood.setItemCount(4);
+        gridLayoutHelpergood.setAutoExpand(true);
+        homeDietMadapter = new HomeDietMadapter(getActivity(), dietlist, gridLayoutHelpergood);
+    }
+
+    private void kitchen() {
+        SingleLayoutHelper singleLayoutHelpertopic = new SingleLayoutHelper();
+        singleLayoutHelpertopic.setItemCount(1);
+        singleLayoutHelpertopic.setAspectRatio(6);
+        singleLayoutHelpertopic.setMarginTop(6);
+        //brand适配器文字
+        String text = "餐厨";
+        homeKitchenTextMadapter = new HomeTopicTextMadapter(getActivity(), topiclist, text, singleLayoutHelpertopic);
+
+        GridLayoutHelper gridLayoutHelpergood = new GridLayoutHelper(2);
+        // 设置布局里Item个数
+        gridLayoutHelpergood.setItemCount(4);
+        gridLayoutHelpergood.setAutoExpand(true);
+        homeKitchenMadapter = new HomeKitchenMadapter(getActivity(), kitchenlist, gridLayoutHelpergood);
+    }
+
+    private void house() {
+        SingleLayoutHelper singleLayoutHelpertopic = new SingleLayoutHelper();
+        singleLayoutHelpertopic.setItemCount(1);
+        singleLayoutHelpertopic.setAspectRatio(6);
+        singleLayoutHelpertopic.setMarginTop(6);
+        //brand适配器文字
+        String text = "居家";
+        homeHouseTextMadapter = new HomeTopicTextMadapter(getActivity(), topiclist, text, singleLayoutHelpertopic);
+
+        GridLayoutHelper gridLayoutHelpergood = new GridLayoutHelper(2);
+        // 设置布局里Item个数
+        gridLayoutHelpergood.setItemCount(4);
+        gridLayoutHelpergood.setAutoExpand(true);
+        homeHouseMadapter = new HomeHouseMadapter(getActivity(), houselist, gridLayoutHelpergood);
+    }
+
     private void TopicText() {
+        SingleLayoutHelper singleLayoutHelpertopic = new SingleLayoutHelper();
+        singleLayoutHelpertopic.setItemCount(1);
+        singleLayoutHelpertopic.setAspectRatio(6);
+        singleLayoutHelpertopic.setMarginTop(6);
+        //brand适配器文字
+        String text = "专题精选";
+        homeTopicTextMadapter = new HomeTopicTextMadapter(getActivity(), topiclist, text, singleLayoutHelpertopic);
+    }
+
+    private void TopicImg() {
         SingleLayoutHelper singleLayoutHelpergood = new SingleLayoutHelper();
         singleLayoutHelpergood.setItemCount(1);
         singleLayoutHelpergood.setAspectRatio(6);
         singleLayoutHelpergood.setMarginTop(6);
-        //brand适配器文字
-        String text = "专题精选";
-
-    }
-
-    private void TopicImg() {
-
+        homeTopicImgMadapter = new HomeTopicImgMadapter(getActivity(), topiclist, singleLayoutHelpergood);
     }
 
     //人气推荐
@@ -284,8 +425,27 @@ public class HomeFragment extends BaseHomeFragment<HomePresenter> implements Hom
 
         delegateAdapter.addAdapter(homeHotGoodsImgMadapter);
 
+        //delegateAdapter.addAdapter(homeTopicTextMadapter);
 
-
+        //delegateAdapter.addAdapter(homeTopicImgMadapter);
+        //居家
+        delegateAdapter.addAdapter(homeHouseTextMadapter);
+        delegateAdapter.addAdapter(homeHouseMadapter);
+        //餐厨 kitchen
+        delegateAdapter.addAdapter(homeKitchenTextMadapter);
+        delegateAdapter.addAdapter(homeKitchenMadapter);
+        //饮食 diet
+        delegateAdapter.addAdapter(homeDietTextMadapter);
+        delegateAdapter.addAdapter(homeDietMadapter);
+        //配件 parts
+        delegateAdapter.addAdapter(homePartsTextMadapter);
+        delegateAdapter.addAdapter(homePartsMadapter);
+        //服装 clothing
+        delegateAdapter.addAdapter(homeClothingTextMadapter);
+        delegateAdapter.addAdapter(homeClothingMadapter);
+        //婴童 bady
+        delegateAdapter.addAdapter(homeBadyTextMadapter);
+        delegateAdapter.addAdapter(homeBadyMadapter);
 
         //布局管理器
         mViewHomeRv.setLayoutManager(virtualLayoutManager);
@@ -322,6 +482,15 @@ public class HomeFragment extends BaseHomeFragment<HomePresenter> implements Hom
             hotgoodslist.addAll(hotGoodsList);
             homeHotGoodsTextMadapter.notifyDataSetChanged();
             homeHotGoodsImgMadapter.notifyDataSetChanged();
+
+            List<HomeBannerBean.DataBean.TopicListBean> topicList = bean.getData().getTopicList();
+            topiclist.addAll(topicList);
+            //homeTopicTextMadapter.notifyDataSetChanged();
+            //homeTopicImgMadapter.notifyDataSetChanged();
+
+            //List<HomeBannerBean.DataBean.CategoryListBean> categoryList = bean.getData().getCategoryList().get(1);
+
+
         }
     }
 

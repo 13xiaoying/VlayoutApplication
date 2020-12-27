@@ -14,7 +14,7 @@
             android:src="@drawable/ic_ion9" />
 
         <TextView
-            android:id="@+id/tv_topic_weight"
+            android:id="@+id/tv_topic_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/iv_good"
