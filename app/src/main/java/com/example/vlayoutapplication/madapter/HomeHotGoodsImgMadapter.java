@@ -18,7 +18,7 @@ import com.example.vlayoutapplication.bean.HomeBannerBean;
 
 import java.util.ArrayList;
 
-public class HomeHotGoodsImgMadapter  extends DelegateAdapter.Adapter {
+public class HomeHotGoodsImgMadapter extends DelegateAdapter.Adapter {
     private Context context;
     private ArrayList<HomeBannerBean.DataBean.HotGoodsListBean> hotgoodslist;
     private LayoutHelper layoutHelper;
@@ -45,9 +45,10 @@ public class HomeHotGoodsImgMadapter  extends DelegateAdapter.Adapter {
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         HomeBannerBean.DataBean.HotGoodsListBean hotGoodsListBean = hotgoodslist.get(position);
         ViewHolder viewHolder = (ViewHolder) holder;
-        viewHolder.text_good_weight.setText(hotGoodsListBean.getName());
-        viewHolder.text_good_price.setText("￥ "+hotGoodsListBean.getRetail_price());
-        Glide.with(context).load(hotGoodsListBean.getList_pic_url()).into(viewHolder.img_good);
+        viewHolder.text_hotgoods_weight.setText(hotGoodsListBean.getName());
+        viewHolder.text_hotgoods_trait.setText(hotGoodsListBean.getGoods_brief());
+        viewHolder.text_hotgoods_price.setText("￥ " + hotGoodsListBean.getRetail_price());
+        Glide.with(context).load(hotGoodsListBean.getList_pic_url()).into(viewHolder.img_hotgoods);
     }
 
     @Override
@@ -56,15 +57,17 @@ public class HomeHotGoodsImgMadapter  extends DelegateAdapter.Adapter {
     }
 
     private class ViewHolder extends RecyclerView.ViewHolder {
-        ImageView img_good;
-        TextView text_good_weight;
-        TextView text_good_price;
+        ImageView img_hotgoods;
+        TextView text_hotgoods_weight;
+        TextView text_hotgoods_trait;
+        TextView text_hotgoods_price;
 
         public ViewHolder(View inflate) {
             super(inflate);
-            img_good = inflate.findViewById(R.id.iv_good);
-            text_good_weight = inflate.findViewById(R.id.tv_good_weight);
-            text_good_price = inflate.findViewById(R.id.tv_good_price);
+            img_hotgoods = inflate.findViewById(R.id.iv_hotgoods);
+            text_hotgoods_weight = inflate.findViewById(R.id.tv_hotgoods_weight);
+            text_hotgoods_trait = inflate.findViewById(R.id.tv_hotgoods_trait);
+            text_hotgoods_price = inflate.findViewById(R.id.tv_hotgoods_price);
         }
     }
 }

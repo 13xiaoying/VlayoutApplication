@@ -16,7 +16,7 @@ import com.example.vlayoutapplication.bean.HomeBannerBean;
 
 import java.util.ArrayList;
 
-public class HomeHotGoodsTextMadapter extends DelegateAdapter.Adapter  {
+public class HomeHotGoodsTextMadapter extends DelegateAdapter.Adapter {
     private Context context;
     private ArrayList<HomeBannerBean.DataBean.HotGoodsListBean> hotgoodslist;
     private String name;
@@ -44,24 +44,25 @@ public class HomeHotGoodsTextMadapter extends DelegateAdapter.Adapter  {
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         //HomeBannerBean.DataBean.NewGoodsListBean newGoodsListBean = goodlist.get(position);
-        ViewHolder viewHolder= (ViewHolder) holder;
+        ViewHolder viewHolder = (ViewHolder) holder;
         viewHolder.text_hotgoods.setText(name);
     }
 
     @Override
     public int getItemCount() {
-        if(hotgoodslist.size()>0){
+        if (hotgoodslist.size() > 0) {
             return 1;
-        }else{
+        } else {
             return 0;
         }
     }
 
     private class ViewHolder extends RecyclerView.ViewHolder {
         TextView text_hotgoods;
+
         public ViewHolder(View inflate) {
             super(inflate);
-            text_hotgoods=inflate.findViewById(R.id.tv_hotgoods_text);
+            text_hotgoods = inflate.findViewById(R.id.tv_hotgoods_text);
         }
     }
 }

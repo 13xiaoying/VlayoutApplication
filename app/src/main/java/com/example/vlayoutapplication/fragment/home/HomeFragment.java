@@ -52,6 +52,8 @@ public class HomeFragment extends BaseHomeFragment<HomePresenter> implements Hom
     private HomeGoodImgMadapter homeGoodImgMadapter;
     private HomeGoodTextMadapter homeGoodTextMadapter;
     private ArrayList<HomeBannerBean.DataBean.HotGoodsListBean> hotgoodslist;
+    private HomeHotGoodsImgMadapter homeHotGoodsImgMadapter;
+    private HomeHotGoodsTextMadapter homeHotGoodsTextMadapter;
 
     @Override
     public void initView(@NonNull final View itemView) {
@@ -64,7 +66,7 @@ public class HomeFragment extends BaseHomeFragment<HomePresenter> implements Hom
         albumlist = new ArrayList<>();//album
         brandlist = new ArrayList<>();//brand
         goodlist = new ArrayList<>();//goodlist
-        hotgoods = new ArrayList<>();//hotgoods
+        hotgoodslist = new ArrayList<>();//hotgoods
 
 
         virtualLayoutManager = new VirtualLayoutManager(getActivity());
@@ -139,6 +141,7 @@ public class HomeFragment extends BaseHomeFragment<HomePresenter> implements Hom
 
         madapter();
     }
+
     //人气推荐
     private void hotgoodImg() {
         GridLayoutHelper gridLayoutHelpergood = new GridLayoutHelper(1);
@@ -166,7 +169,7 @@ public class HomeFragment extends BaseHomeFragment<HomePresenter> implements Hom
         //gridLayoutHelperbrand.setSpanCount(2);
         //brand适配器图片
         gridLayoutHelpergood.setAutoExpand(true);
-        //homeGoodImgMadapter = new HomeHotGoodsImgMadapter(getActivity(), goodlist, gridLayoutHelpergood);
+        homeHotGoodsImgMadapter = new HomeHotGoodsImgMadapter(getActivity(), hotgoodslist, gridLayoutHelpergood);
     }
 
     private void hotgoodText() {
@@ -176,7 +179,7 @@ public class HomeFragment extends BaseHomeFragment<HomePresenter> implements Hom
         singleLayoutHelpergood.setMarginTop(6);
         //brand适配器文字
         String text = "人气推荐";
-        //homeGoodTextMadapter = new HomeHotGoodsTextMadapter(getActivity(), goodlist, text, singleLayoutHelpergood);
+        homeHotGoodsTextMadapter = new HomeHotGoodsTextMadapter(getActivity(), hotgoodslist, text, singleLayoutHelpergood);
     }
 
 
@@ -191,6 +194,7 @@ public class HomeFragment extends BaseHomeFragment<HomePresenter> implements Hom
         String text = "周一周四·新品首发";
         homeGoodTextMadapter = new HomeGoodTextMadapter(getActivity(), goodlist, text, singleLayoutHelpergood);
     }
+
     //good - img
     private void goodImg() {
         GridLayoutHelper gridLayoutHelpergood = new GridLayoutHelper(2);
@@ -220,6 +224,7 @@ public class HomeFragment extends BaseHomeFragment<HomePresenter> implements Hom
         gridLayoutHelpergood.setAutoExpand(true);
         homeGoodImgMadapter = new HomeGoodImgMadapter(getActivity(), goodlist, gridLayoutHelpergood);
     }
+
     //品牌制造商直供
     //bradn - text
     private void brandText() {
@@ -231,6 +236,7 @@ public class HomeFragment extends BaseHomeFragment<HomePresenter> implements Hom
         String text = "品牌制造商直供";
         homeBrandTextMadapter = new HomeBrandTextMadapter(getActivity(), text, brandlist, singleLayoutHelperbrand);
     }
+
     //brand - img
     private void brandImg() {
         GridLayoutHelper gridLayoutHelperbrand = new GridLayoutHelper(2);
@@ -258,6 +264,7 @@ public class HomeFragment extends BaseHomeFragment<HomePresenter> implements Hom
         gridLayoutHelperbrand.setAutoExpand(true);
         homeBrandImgMadapter = new HomeBrandImgMadapter(getActivity(), brandlist, gridLayoutHelperbrand);
     }
+
     //album
     private void album() {
         //设置兰格布局
@@ -270,6 +277,7 @@ public class HomeFragment extends BaseHomeFragment<HomePresenter> implements Hom
         //album适配器
         homeAlbumMadapter = new HomeAlbumMadapter(getActivity(), albumlist, columnLayoutHelperalbum);
     }
+
     //banner
     private void banner() {
         //设置通栏布局
@@ -278,6 +286,7 @@ public class HomeFragment extends BaseHomeFragment<HomePresenter> implements Hom
         //banner适配器
         homeBannerMadapter = new HomeBannerMadapter(getActivity(), bannerlist, columnLayoutHelperBanner);
     }
+
     //搜索
     private void seek() {
         //设置通栏布局
@@ -319,6 +328,11 @@ public class HomeFragment extends BaseHomeFragment<HomePresenter> implements Hom
 
         delegateAdapter.addAdapter(homeGoodImgMadapter);
 
+        delegateAdapter.addAdapter(homeHotGoodsImgMadapter);
+
+        delegateAdapter.addAdapter(homeHotGoodsTextMadapter);
+
+
         //布局管理器
 //        mViewHomeRv.setLayoutManager(virtualLayoutManager);
         //绑定适配器
@@ -349,7 +363,10 @@ public class HomeFragment extends BaseHomeFragment<HomePresenter> implements Hom
             homeGoodImgMadapter.notifyDataSetChanged();
             homeGoodTextMadapter.notifyDataSetChanged();
 
-            Log.i("goodlist", "onInit: good"+newGoodsList.toString());
+            List<HomeBannerBean.DataBean.HotGoodsListBean> hotGoodsList = bean.getData().getHotGoodsList();
+            hotGoodsList.addAll(hotGoodsList);
+            homeHotGoodsImgMadapter.notifyDataSetChanged();
+            homeHotGoodsTextMadapter.notifyDataSetChanged();
         }
     }
 
