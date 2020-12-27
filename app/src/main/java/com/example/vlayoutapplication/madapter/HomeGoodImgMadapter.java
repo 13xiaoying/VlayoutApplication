@@ -12,20 +12,18 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.alibaba.android.vlayout.DelegateAdapter;
 import com.alibaba.android.vlayout.LayoutHelper;
-import com.alibaba.android.vlayout.layout.ColumnLayoutHelper;
-import com.alibaba.android.vlayout.layout.GridLayoutHelper;
 import com.bumptech.glide.Glide;
 import com.example.vlayoutapplication.R;
 import com.example.vlayoutapplication.bean.HomeBannerBean;
 
 import java.util.ArrayList;
 
-public class HomeAlbumMadapter extends DelegateAdapter.Adapter {
+public class HomeGoodImgMadapter extends DelegateAdapter.Adapter {
     private Context context;
     private ArrayList<HomeBannerBean.DataBean.ChannelBean> albumlist;
     private LayoutHelper layoutHelper;
 
-    public HomeAlbumMadapter(Context context, ArrayList<HomeBannerBean.DataBean.ChannelBean> albumlist, LayoutHelper layoutHelper) {
+    public HomeGoodImgMadapter(Context context, ArrayList<HomeBannerBean.DataBean.ChannelBean> albumlist, LayoutHelper layoutHelper) {
         this.context = context;
         this.albumlist = albumlist;
         this.layoutHelper = layoutHelper;

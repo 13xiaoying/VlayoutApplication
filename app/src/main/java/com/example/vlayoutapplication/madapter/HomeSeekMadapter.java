@@ -21,16 +21,16 @@ import java.util.ArrayList;
 
 public class HomeSeekMadapter extends DelegateAdapter.Adapter {
     private Context context;
-    private ColumnLayoutHelper columnLayoutHelper;
+    private LayoutHelper layoutHelper;
 
-    public HomeSeekMadapter(Context context, ColumnLayoutHelper columnLayoutHelper) {
+    public HomeSeekMadapter(Context context, LayoutHelper layoutHelper) {
         this.context = context;
-        this.columnLayoutHelper = columnLayoutHelper;
+        this.layoutHelper = layoutHelper;
     }
 
     @Override
     public LayoutHelper onCreateLayoutHelper() {
-        return columnLayoutHelper;
+        return layoutHelper;
     }
 
     @NonNull

@@ -74,9 +74,10 @@ public class HomeFragment extends BaseHomeFragment<HomePresenter> implements Hom
         seek();
         banner();
         album();
-        brandImg();
         brandText();
-        
+        brandImg();
+        goodText();
+        goodImg();
 
         //singleLayoutHelper.setItemCount(3);// 设置布局里Item个数
         //singleLayoutHelper.setPadding(20, 20, 20, 20);// 设置LayoutHelper的子元素相对LayoutHelper边缘的距离
@@ -127,6 +128,43 @@ public class HomeFragment extends BaseHomeFragment<HomePresenter> implements Hom
         madapter();
     }
 
+    private void goodImg() {
+        GridLayoutHelper gridLayoutHelpergood = new GridLayoutHelper(2);
+        // 设置布局里Item个数
+        //gridLayoutHelperbrand.setItemCount(2);
+        // 设置LayoutHelper的子元素相对LayoutHelper边缘的距离
+        //gridLayoutHelperbrand.setPadding(30, 6, 6, 6);
+        // 设置LayoutHelper边缘相对父控件（即RecyclerView）的距离
+        //gridLayoutHelperbrand.setMargin(30, 6, 6, 6);
+        // 设置背景颜色
+        //gridLayoutHelperbrand.setBgColor(Color.GREEN);
+        // 设置设置布局内每行布局的宽与高的比
+        //gridLayoutHelperbrand.setAspectRatio(10);
+        //设置每行中 每个网格宽度 占 每行总宽度 的比例
+        //gridLayoutHelperbrand.setWeights(new float[]{40, 40, 40, 40});
+        // 控制子元素之间的垂直间距
+        //gridLayoutHelperbrand.setVGap(10);
+        // 控制子元素之间的水平间距
+        //gridLayoutHelperbrand.setHGap(10);
+        //是否自动填充空白区域
+        //gridLayoutHelperbrand.setAutoExpand(false);
+        // 设置每行多少个网格
+        //gridLayoutHelperbrand.setSpanCount(2);
+        //brand适配器图片
+        gridLayoutHelpergood.setAutoExpand(true);
+        homeBrandImgMadapter = new HomeBrandImgMadapter(getActivity(), brandlist, gridLayoutHelpergood);
+    }
+
+    private void goodText() {
+        SingleLayoutHelper singleLayoutHelperbrand = new SingleLayoutHelper();
+        singleLayoutHelperbrand.setItemCount(1);
+        singleLayoutHelperbrand.setAspectRatio(6);
+        singleLayoutHelperbrand.setMarginTop(6);
+        //brand适配器文字
+        String text = "品牌制造商直供";
+        homeBrandTextMadapter = new HomeBrandTextMadapter(getActivity(), text,brandlist, singleLayoutHelperbrand);
+    }
+
     private void brandText() {
         SingleLayoutHelper singleLayoutHelperbrand = new SingleLayoutHelper();
         singleLayoutHelperbrand.setItemCount(1);
@@ -134,34 +172,34 @@ public class HomeFragment extends BaseHomeFragment<HomePresenter> implements Hom
         singleLayoutHelperbrand.setMarginTop(6);
         //brand适配器文字
         String text = "品牌制造商直供";
-        homeBrandTextMadapter = new HomeBrandTextMadapter(getActivity(), text, singleLayoutHelperbrand);
+        homeBrandTextMadapter = new HomeBrandTextMadapter(getActivity(), text,brandlist, singleLayoutHelperbrand);
     }
 
     private void brandImg() {
-        GridLayoutHelper gridLayoutHelperbrand = new GridLayoutHelper(1);
+        GridLayoutHelper gridLayoutHelperbrand = new GridLayoutHelper(2);
         // 设置布局里Item个数
-        gridLayoutHelperbrand.setItemCount(2);
+        //gridLayoutHelperbrand.setItemCount(2);
         // 设置LayoutHelper的子元素相对LayoutHelper边缘的距离
-        gridLayoutHelperbrand.setPadding(30, 6, 6, 6);
+        //gridLayoutHelperbrand.setPadding(30, 6, 6, 6);
         // 设置LayoutHelper边缘相对父控件（即RecyclerView）的距离
-        gridLayoutHelperbrand.setMargin(30, 6, 6, 6);
+        //gridLayoutHelperbrand.setMargin(30, 6, 6, 6);
         // 设置背景颜色
-        gridLayoutHelperbrand.setBgColor(Color.GREEN);
+        //gridLayoutHelperbrand.setBgColor(Color.GREEN);
         // 设置设置布局内每行布局的宽与高的比
-        gridLayoutHelperbrand.setAspectRatio(10);
+        //gridLayoutHelperbrand.setAspectRatio(10);
         //设置每行中 每个网格宽度 占 每行总宽度 的比例
-        gridLayoutHelperbrand.setWeights(new float[]{20, 20, 20, 20, 20});
+        //gridLayoutHelperbrand.setWeights(new float[]{40, 40, 40, 40});
         // 控制子元素之间的垂直间距
-        gridLayoutHelperbrand.setVGap(10);
+        //gridLayoutHelperbrand.setVGap(10);
         // 控制子元素之间的水平间距
-        gridLayoutHelperbrand.setHGap(10);
+        //gridLayoutHelperbrand.setHGap(10);
         //是否自动填充空白区域
-        gridLayoutHelperbrand.setAutoExpand(false);
+        //gridLayoutHelperbrand.setAutoExpand(false);
         // 设置每行多少个网格
-        gridLayoutHelperbrand.setSpanCount(2);
+        //gridLayoutHelperbrand.setSpanCount(2);
         //brand适配器图片
+        gridLayoutHelperbrand.setAutoExpand(true);
         homeBrandImgMadapter = new HomeBrandImgMadapter(getActivity(), brandlist, gridLayoutHelperbrand);
-
     }
 
     private void album() {
@@ -178,10 +216,10 @@ public class HomeFragment extends BaseHomeFragment<HomePresenter> implements Hom
 
     private void banner() {
         //设置通栏布局
-        SingleLayoutHelper singleLayoutHelperBanner = new SingleLayoutHelper();
-        singleLayoutHelperBanner.setItemCount(2);
+        ColumnLayoutHelper columnLayoutHelperBanner = new SingleLayoutHelper();
+        columnLayoutHelperBanner.setItemCount(1);
         //banner适配器
-        homeBannerMadapter = new HomeBannerMadapter(getActivity(), bannerlist, singleLayoutHelperBanner);
+        homeBannerMadapter = new HomeBannerMadapter(getActivity(), bannerlist,columnLayoutHelperBanner);
     }
 
     private void seek() {
@@ -211,10 +249,15 @@ public class HomeFragment extends BaseHomeFragment<HomePresenter> implements Hom
         DelegateAdapter delegateAdapter = new DelegateAdapter(virtualLayoutManager, true);
 
         delegateAdapter.addAdapter(homeSeekMadapter);
+
         delegateAdapter.addAdapter(homeBannerMadapter);
+
         delegateAdapter.addAdapter(homeAlbumMadapter);
-        delegateAdapter.addAdapter(homeBrandImgMadapter);
+
         delegateAdapter.addAdapter(homeBrandTextMadapter);
+
+        delegateAdapter.addAdapter(homeBrandImgMadapter);
+
 
 
         //布局管理器
@@ -225,6 +268,7 @@ public class HomeFragment extends BaseHomeFragment<HomePresenter> implements Hom
 
     @Override
     public void onInit(HomeBannerBean bean) {
+        Log.i(TAG, "onInit: "+bean.toString());
         if (bean != null) {
             homeSeekMadapter.notifyDataSetChanged();
 

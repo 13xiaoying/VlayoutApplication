@@ -24,12 +24,15 @@ import java.util.ArrayList;
 public class HomeBrandTextMadapter extends DelegateAdapter.Adapter {
     private Context context;
     private String name;
+    private ArrayList<HomeBannerBean.DataBean.BrandListBean> brandlist;
+
     private LayoutHelper LayoutHelper;
 
-    public HomeBrandTextMadapter(Context context, String name, LayoutHelper LayoutHelper) {
+    public HomeBrandTextMadapter(Context context, String name, ArrayList<HomeBannerBean.DataBean.BrandListBean> brandlist, com.alibaba.android.vlayout.LayoutHelper layoutHelper) {
         this.context = context;
         this.name = name;
-        this.LayoutHelper = LayoutHelper;
+        this.brandlist = brandlist;
+        LayoutHelper = layoutHelper;
     }
 
     @Override
@@ -52,7 +55,11 @@ public class HomeBrandTextMadapter extends DelegateAdapter.Adapter {
 
     @Override
     public int getItemCount() {
-        return 1;
+        if(brandlist.size()>0){
+            return 1;
+        }else{
+            return 0;
+        }
     }
 
     private class TextViewHolder extends RecyclerView.ViewHolder {

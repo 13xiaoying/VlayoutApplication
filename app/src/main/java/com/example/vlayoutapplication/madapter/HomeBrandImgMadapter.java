@@ -25,17 +25,17 @@ import java.util.ArrayList;
 public class HomeBrandImgMadapter extends DelegateAdapter.Adapter {
     private Context context;
     private ArrayList<HomeBannerBean.DataBean.BrandListBean> brandlist;
-    private GridLayoutHelper gridLayoutHelper;
+    private LayoutHelper layoutHelper;
 
-    public HomeBrandImgMadapter(Context context, ArrayList<HomeBannerBean.DataBean.BrandListBean> brandlist, GridLayoutHelper gridLayoutHelper) {
+    public HomeBrandImgMadapter(Context context, ArrayList<HomeBannerBean.DataBean.BrandListBean> brandlist, LayoutHelper layoutHelper) {
         this.context = context;
         this.brandlist = brandlist;
-        this.gridLayoutHelper = gridLayoutHelper;
+        this.layoutHelper = layoutHelper;
     }
 
     @Override
     public LayoutHelper onCreateLayoutHelper() {
-        return gridLayoutHelper;
+        return layoutHelper;
     }
 
     @NonNull
@@ -49,6 +49,8 @@ public class HomeBrandImgMadapter extends DelegateAdapter.Adapter {
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         HomeBannerBean.DataBean.BrandListBean brandListBean = brandlist.get(position);
         ImgViewHolder imgViewHolder = (ImgViewHolder) holder;
+        imgViewHolder.text_manu.setText(brandListBean.getName());
+        imgViewHolder.text_price.setText(brandListBean.getFloor_price()+"元起");
         Glide.with(context).load(brandListBean.getNew_pic_url()).into(imgViewHolder.img);
     }
 
@@ -59,9 +61,13 @@ public class HomeBrandImgMadapter extends DelegateAdapter.Adapter {
 
     private class ImgViewHolder extends RecyclerView.ViewHolder {
         ImageView img;
+        TextView text_manu;
+        TextView text_price;
         public ImgViewHolder(View inflate) {
             super(inflate);
             img = inflate.findViewById(R.id.brand_img);
+            text_manu = inflate.findViewById(R.id.brand_manu);
+            text_price = inflate.findViewById(R.id.brand_price);
         }
     }
 

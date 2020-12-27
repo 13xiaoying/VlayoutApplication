@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.alibaba.android.vlayout.DelegateAdapter;
 import com.alibaba.android.vlayout.LayoutHelper;
+import com.alibaba.android.vlayout.layout.ColumnLayoutHelper;
 import com.alibaba.android.vlayout.layout.SingleLayoutHelper;
 import com.bumptech.glide.Glide;
 import com.example.vlayoutapplication.R;
@@ -23,12 +24,12 @@ import java.util.ArrayList;
 public class HomeBannerMadapter extends DelegateAdapter.Adapter {
     private Context context;
     private ArrayList<HomeBannerBean.DataBean.BannerBean> list;
-    private SingleLayoutHelper singleLayoutHelper;
+    private LayoutHelper layoutHelper;
 
-    public HomeBannerMadapter(Context context, ArrayList<HomeBannerBean.DataBean.BannerBean> list, SingleLayoutHelper singleLayoutHelper) {
+    public HomeBannerMadapter(Context context, ArrayList<HomeBannerBean.DataBean.BannerBean> list, LayoutHelper layoutHelper) {
         this.context = context;
         this.list = list;
-        this.singleLayoutHelper = singleLayoutHelper;
+        this.layoutHelper = layoutHelper;
     }
 
     @NonNull
@@ -67,7 +68,7 @@ public class HomeBannerMadapter extends DelegateAdapter.Adapter {
 
     @Override
     public LayoutHelper onCreateLayoutHelper() {
-        return singleLayoutHelper;
+        return layoutHelper;
     }
 
     private class ViewHolde extends RecyclerView.ViewHolder {
