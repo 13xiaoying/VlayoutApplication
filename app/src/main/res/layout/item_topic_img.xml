@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/iv_topic"
+            android:layout_width="350dp"
+            android:layout_height="230dp"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/ic_ion9" />
+
+        <TextView
+            android:id="@+id/tv_topic_weight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/iv_good"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"
+            android:text="123" />
+
+        <TextView
+            android:id="@+id/tv_topic_price"
+            android:layout_toRightOf="@id/tv_good_weight"
+            android:layout_marginLeft="5dp"
+            android:text="123"
+            android:layout_alignTop="@id/tv_good_weight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#FF0000" />
+
+        <TextView
+            android:id="@+id/tv_topic_sale"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_good_weight"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:text="123" />
+    </androidx.recyclerview.widget.RecyclerView>
+
+</RelativeLayout>

@@ -92,7 +92,8 @@ public class HomeFragment extends BaseHomeFragment<HomePresenter> implements Hom
         goodImg();
         hotgoodText();
         hotgoodImg();
-
+        TopicImg();
+        TopicText();
         //singleLayoutHelper.setItemCount(3);// 设置布局里Item个数
         //singleLayoutHelper.setPadding(20, 20, 20, 20);// 设置LayoutHelper的子元素相对LayoutHelper边缘的距离
         //singleLayoutHelper.setMargin(20, 20, 20, 20);// 设置LayoutHelper边缘相对父控件（即RecyclerView）的距离
@@ -142,32 +143,25 @@ public class HomeFragment extends BaseHomeFragment<HomePresenter> implements Hom
         madapter();
     }
 
+    private void TopicText() {
+        SingleLayoutHelper singleLayoutHelpergood = new SingleLayoutHelper();
+        singleLayoutHelpergood.setItemCount(1);
+        singleLayoutHelpergood.setAspectRatio(6);
+        singleLayoutHelpergood.setMarginTop(6);
+        //brand适配器文字
+        String text = "专题精选";
+
+    }
+
+    private void TopicImg() {
+
+    }
+
     //人气推荐
     private void hotgoodImg() {
         GridLayoutHelper gridLayoutHelpergood = new GridLayoutHelper(1);
         // 设置布局里Item个数
         gridLayoutHelpergood.setItemCount(3);
-        // 设置布局里Item个数
-        //gridLayoutHelperbrand.setItemCount(2);
-        // 设置LayoutHelper的子元素相对LayoutHelper边缘的距离
-        //gridLayoutHelperbrand.setPadding(30, 6, 6, 6);
-        // 设置LayoutHelper边缘相对父控件（即RecyclerView）的距离
-        //gridLayoutHelperbrand.setMargin(30, 6, 6, 6);
-        // 设置背景颜色
-        //gridLayoutHelperbrand.setBgColor(Color.GREEN);
-        // 设置设置布局内每行布局的宽与高的比
-        //gridLayoutHelperbrand.setAspectRatio(10);
-        //设置每行中 每个网格宽度 占 每行总宽度 的比例
-        //gridLayoutHelperbrand.setWeights(new float[]{40, 40, 40, 40});
-        // 控制子元素之间的垂直间距
-        //gridLayoutHelperbrand.setVGap(10);
-        // 控制子元素之间的水平间距
-        //gridLayoutHelperbrand.setHGap(10);
-        //是否自动填充空白区域
-        //gridLayoutHelperbrand.setAutoExpand(false);
-        // 设置每行多少个网格
-        //gridLayoutHelperbrand.setSpanCount(2);
-        //brand适配器图片
         gridLayoutHelpergood.setAutoExpand(true);
         homeHotGoodsImgMadapter = new HomeHotGoodsImgMadapter(getActivity(), hotgoodslist, gridLayoutHelpergood);
     }
@@ -200,27 +194,6 @@ public class HomeFragment extends BaseHomeFragment<HomePresenter> implements Hom
         GridLayoutHelper gridLayoutHelpergood = new GridLayoutHelper(2);
         // 设置布局里Item个数
         gridLayoutHelpergood.setItemCount(2);
-        // 设置布局里Item个数
-        //gridLayoutHelperbrand.setItemCount(2);
-        // 设置LayoutHelper的子元素相对LayoutHelper边缘的距离
-        //gridLayoutHelperbrand.setPadding(30, 6, 6, 6);
-        // 设置LayoutHelper边缘相对父控件（即RecyclerView）的距离
-        //gridLayoutHelperbrand.setMargin(30, 6, 6, 6);
-        // 设置背景颜色
-        //gridLayoutHelperbrand.setBgColor(Color.GREEN);
-        // 设置设置布局内每行布局的宽与高的比
-        //gridLayoutHelperbrand.setAspectRatio(10);
-        //设置每行中 每个网格宽度 占 每行总宽度 的比例
-        //gridLayoutHelperbrand.setWeights(new float[]{40, 40, 40, 40});
-        // 控制子元素之间的垂直间距
-        //gridLayoutHelperbrand.setVGap(10);
-        // 控制子元素之间的水平间距
-        //gridLayoutHelperbrand.setHGap(10);
-        //是否自动填充空白区域
-        //gridLayoutHelperbrand.setAutoExpand(false);
-        // 设置每行多少个网格
-        //gridLayoutHelperbrand.setSpanCount(2);
-        //brand适配器图片
         gridLayoutHelpergood.setAutoExpand(true);
         homeGoodImgMadapter = new HomeGoodImgMadapter(getActivity(), goodlist, gridLayoutHelpergood);
     }
@@ -240,27 +213,6 @@ public class HomeFragment extends BaseHomeFragment<HomePresenter> implements Hom
     //brand - img
     private void brandImg() {
         GridLayoutHelper gridLayoutHelperbrand = new GridLayoutHelper(2);
-        // 设置布局里Item个数
-        //gridLayoutHelperbrand.setItemCount(2);
-        // 设置LayoutHelper的子元素相对LayoutHelper边缘的距离
-        //gridLayoutHelperbrand.setPadding(30, 6, 6, 6);
-        // 设置LayoutHelper边缘相对父控件（即RecyclerView）的距离
-        //gridLayoutHelperbrand.setMargin(30, 6, 6, 6);
-        // 设置背景颜色
-        //gridLayoutHelperbrand.setBgColor(Color.GREEN);
-        // 设置设置布局内每行布局的宽与高的比
-        //gridLayoutHelperbrand.setAspectRatio(10);
-        //设置每行中 每个网格宽度 占 每行总宽度 的比例
-        //gridLayoutHelperbrand.setWeights(new float[]{40, 40, 40, 40});
-        // 控制子元素之间的垂直间距
-        //gridLayoutHelperbrand.setVGap(10);
-        // 控制子元素之间的水平间距
-        //gridLayoutHelperbrand.setHGap(10);
-        //是否自动填充空白区域
-        //gridLayoutHelperbrand.setAutoExpand(false);
-        // 设置每行多少个网格
-        //gridLayoutHelperbrand.setSpanCount(2);
-        //brand适配器图片
         gridLayoutHelperbrand.setAutoExpand(true);
         homeBrandImgMadapter = new HomeBrandImgMadapter(getActivity(), brandlist, gridLayoutHelperbrand);
     }
@@ -328,13 +280,15 @@ public class HomeFragment extends BaseHomeFragment<HomePresenter> implements Hom
 
         delegateAdapter.addAdapter(homeGoodImgMadapter);
 
+        delegateAdapter.addAdapter(homeHotGoodsTextMadapter);
+
         delegateAdapter.addAdapter(homeHotGoodsImgMadapter);
 
-        delegateAdapter.addAdapter(homeHotGoodsTextMadapter);
+
 
 
         //布局管理器
-//        mViewHomeRv.setLayoutManager(virtualLayoutManager);
+        mViewHomeRv.setLayoutManager(virtualLayoutManager);
         //绑定适配器
         mViewHomeRv.setAdapter(delegateAdapter);
     }
@@ -343,7 +297,8 @@ public class HomeFragment extends BaseHomeFragment<HomePresenter> implements Hom
     public void onInit(HomeBannerBean bean) {
         Log.i(TAG, "onInit: " + bean.toString());
         if (bean != null) {
-            homeSeekMadapter.notifyDataSetChanged();
+
+//            homeSeekMadapter.notifyDataSetChanged();
 
             List<HomeBannerBean.DataBean.BannerBean> banner = bean.getData().getBanner();
             bannerlist.addAll(banner);
@@ -364,9 +319,9 @@ public class HomeFragment extends BaseHomeFragment<HomePresenter> implements Hom
             homeGoodTextMadapter.notifyDataSetChanged();
 
             List<HomeBannerBean.DataBean.HotGoodsListBean> hotGoodsList = bean.getData().getHotGoodsList();
-            hotGoodsList.addAll(hotGoodsList);
-            homeHotGoodsImgMadapter.notifyDataSetChanged();
+            hotgoodslist.addAll(hotGoodsList);
             homeHotGoodsTextMadapter.notifyDataSetChanged();
+            homeHotGoodsImgMadapter.notifyDataSetChanged();
         }
     }
 

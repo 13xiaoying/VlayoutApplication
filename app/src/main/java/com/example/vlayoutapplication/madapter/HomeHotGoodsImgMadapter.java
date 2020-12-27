@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -44,16 +45,20 @@ public class HomeHotGoodsImgMadapter extends DelegateAdapter.Adapter {
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         HomeBannerBean.DataBean.HotGoodsListBean hotGoodsListBean = hotgoodslist.get(position);
-        ViewHolder viewHolder = (ViewHolder) holder;
+        ViewHolder viewHolder= (ViewHolder) holder;
         viewHolder.text_hotgoods_weight.setText(hotGoodsListBean.getName());
         viewHolder.text_hotgoods_trait.setText(hotGoodsListBean.getGoods_brief());
-        viewHolder.text_hotgoods_price.setText("￥ " + hotGoodsListBean.getRetail_price());
+        viewHolder.text_hotgoods_price.setText("￥ "+hotGoodsListBean.getRetail_price());
         Glide.with(context).load(hotGoodsListBean.getList_pic_url()).into(viewHolder.img_hotgoods);
     }
 
     @Override
     public int getItemCount() {
-        return hotgoodslist.size();
+        if (hotgoodslist.size()>0){
+            return hotgoodslist.size();
+        }else {
+            return 0;
+        }
     }
 
     private class ViewHolder extends RecyclerView.ViewHolder {

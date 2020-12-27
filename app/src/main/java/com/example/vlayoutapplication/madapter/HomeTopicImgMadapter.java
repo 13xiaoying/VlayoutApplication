@@ -4,7 +4,6 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -12,19 +11,21 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.alibaba.android.vlayout.DelegateAdapter;
 import com.alibaba.android.vlayout.LayoutHelper;
-import com.alibaba.android.vlayout.layout.ColumnLayoutHelper;
-import com.bumptech.glide.Glide;
 import com.example.vlayoutapplication.R;
 import com.example.vlayoutapplication.bean.HomeBannerBean;
 
 import java.util.ArrayList;
 
-public class HomeSeekMadapter extends DelegateAdapter.Adapter {
+public class HomeTopicImgMadapter extends DelegateAdapter.Adapter {
     private Context context;
+    private ArrayList<HomeBannerBean.DataBean.TopicListBean> topiclist;
+    private String name;
     private LayoutHelper layoutHelper;
 
-    public HomeSeekMadapter(Context context, LayoutHelper layoutHelper) {
+    public HomeTopicImgMadapter(Context context, ArrayList<HomeBannerBean.DataBean.TopicListBean> topiclist, String name, LayoutHelper layoutHelper) {
         this.context = context;
+        this.topiclist = topiclist;
+        this.name = name;
         this.layoutHelper = layoutHelper;
     }
 
@@ -36,22 +37,31 @@ public class HomeSeekMadapter extends DelegateAdapter.Adapter {
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View inflate = LayoutInflater.from(context).inflate(R.layout.item_seek, parent, false);
+        View inflate = LayoutInflater.from(context).inflate(R.layout.item_topic_img, parent, false);
         return new ViewHolder(inflate);
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+        HomeBannerBean.DataBean.TopicListBean topicListBean = topiclist.get(position);
+        ViewHolder viewHolder= (ViewHolder) holder;
+        viewHolder.text_good.setText(name);
     }
 
     @Override
     public int getItemCount() {
-        return 1;
+        if(topiclist.size()>0){
+            return 1;
+        }else{
+            return 0;
+        }
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder {
+    private class ViewHolder extends RecyclerView.ViewHolder {
+        TextView text_topic;
         public ViewHolder(View inflate) {
             super(inflate);
+            text_topic=inflate.findViewById(R.id.tv_good);
         }
     }
 }

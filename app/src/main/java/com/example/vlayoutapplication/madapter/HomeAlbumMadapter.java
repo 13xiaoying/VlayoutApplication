@@ -29,6 +29,12 @@ public class HomeAlbumMadapter extends DelegateAdapter.Adapter {
         this.context = context;
         this.albumlist = albumlist;
         this.layoutHelper = layoutHelper;
+
+
+
+
+
+
     }
 
     @Override
@@ -40,29 +46,35 @@ public class HomeAlbumMadapter extends DelegateAdapter.Adapter {
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View inflate = LayoutInflater.from(context).inflate(R.layout.item_album, parent, false);
-        return new ViewHolder(inflate);
+        return new ViewHol(inflate);
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         HomeBannerBean.DataBean.ChannelBean channelBean = albumlist.get(position);
-        ViewHolder viewHolder= (ViewHolder) holder;
+        ViewHol viewHolder= (ViewHol) holder;
         viewHolder.text_album.setText(channelBean.getName());
         Glide.with(context).load(channelBean.getIcon_url()).into(viewHolder.img_album);
     }
 
     @Override
     public int getItemCount() {
-        return albumlist.size();
+        if (albumlist.size()>0){
+            return albumlist.size();
+        }else {
+            return 0;
+        }
     }
 
-    private class ViewHolder extends RecyclerView.ViewHolder {
+
+    private class ViewHol extends RecyclerView.ViewHolder {
         ImageView img_album;
         TextView text_album;
-        public ViewHolder(View inflate) {
-            super(inflate);
-            img_album=inflate.findViewById(R.id.iv_album);
-            text_album=inflate.findViewById(R.id.tv_album);
+
+        public ViewHol(@NonNull View itemView) {
+            super(itemView);
+            img_album=itemView.findViewById(R.id.iv_album);
+            text_album=itemView.findViewById(R.id.tv_album);
         }
     }
 }

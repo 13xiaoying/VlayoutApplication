@@ -59,7 +59,6 @@ public class HomeHotGoodsTextMadapter extends DelegateAdapter.Adapter {
 
     private class ViewHolder extends RecyclerView.ViewHolder {
         TextView text_hotgoods;
-
         public ViewHolder(View inflate) {
             super(inflate);
             text_hotgoods = inflate.findViewById(R.id.tv_hotgoods_text);
