@@ -37,21 +37,13 @@ public class HomeFragment extends BaseHomeFragment<HomePresenter> implements Hom
     private RecyclerView mViewHomeRv;
     private ArrayList<HomeBannerBean.DataBean.BannerBean> bannerlist;
     private VirtualLayoutManager virtualLayoutManager;
-    private HomeAlbumMadapter homeAlbumMadapter;
-    private GridLayoutHelper gridLayoutHelperbrand;
-    private HomeBannerMadapter homeBannerMadapter;
     private ArrayList<HomeBannerBean.DataBean.ChannelBean> albumlist;
-    private SingleLayoutHelper singleLayoutHelper;
-    private ColumnLayoutHelper columnLayoutHelper;
-    private LinearLayoutHelper linearLayoutHelper;
-    private HomeSeekMadapter homeSeekMadapter;
-    private ColumnLayoutHelper columnLayoutHelperseek;
     private ArrayList<HomeBannerBean.DataBean.BrandListBean> brandlist;
-    private HomeBrandImgMadapter homeBrandImgMadapter;
     private HomeBrandTextMadapter homeBrandTextMadapter;
-    private SingleLayoutHelper singleLayoutHelperBanner;
-    private ColumnLayoutHelper columnLayoutHelperalbum;
-    private SingleLayoutHelper singleLayoutHelperbrand;
+    private HomeBrandImgMadapter homeBrandImgMadapter;
+    private HomeAlbumMadapter homeAlbumMadapter;
+    private HomeBannerMadapter homeBannerMadapter;
+    private HomeSeekMadapter homeSeekMadapter;
 
     @Override
     public void initView(@NonNull final View itemView) {
@@ -63,8 +55,6 @@ public class HomeFragment extends BaseHomeFragment<HomePresenter> implements Hom
         bannerlist = new ArrayList<>();//banner
         albumlist = new ArrayList<>();//album
         brandlist = new ArrayList<>();//brand
-
-
 
 
         virtualLayoutManager = new VirtualLayoutManager(getActivity());
@@ -84,9 +74,9 @@ public class HomeFragment extends BaseHomeFragment<HomePresenter> implements Hom
         seek();
         banner();
         album();
-        brand();
-
-
+        brandImg();
+        brandText();
+        
 
         //singleLayoutHelper.setItemCount(3);// 设置布局里Item个数
         //singleLayoutHelper.setPadding(20, 20, 20, 20);// 设置LayoutHelper的子元素相对LayoutHelper边缘的距离
@@ -130,17 +120,25 @@ public class HomeFragment extends BaseHomeFragment<HomePresenter> implements Hom
         // 设置每行多少个网格
         gridLayoutHelper.setSpanCount(5);*/
 
+        //设置通栏布局
+        SingleLayoutHelper singleLayoutHelper = new SingleLayoutHelper();
+        singleLayoutHelper.setItemCount(1);       // 公共属性
+
         madapter();
     }
 
-    private void brand() {
-        singleLayoutHelperbrand = new SingleLayoutHelper();
+    private void brandText() {
+        SingleLayoutHelper singleLayoutHelperbrand = new SingleLayoutHelper();
         singleLayoutHelperbrand.setItemCount(1);
-
+        singleLayoutHelperbrand.setAspectRatio(6);
+        singleLayoutHelperbrand.setMarginTop(6);
         //brand适配器文字
-        homeBrandTextMadapter = new HomeBrandTextMadapter(getActivity(),singleLayoutHelperbrand);
+        String text = "品牌制造商直供";
+        homeBrandTextMadapter = new HomeBrandTextMadapter(getActivity(), text, singleLayoutHelperbrand);
+    }
 
-        gridLayoutHelperbrand = new GridLayoutHelper(1);
+    private void brandImg() {
+        GridLayoutHelper gridLayoutHelperbrand = new GridLayoutHelper(1);
         // 设置布局里Item个数
         gridLayoutHelperbrand.setItemCount(2);
         // 设置LayoutHelper的子元素相对LayoutHelper边缘的距离
@@ -152,7 +150,7 @@ public class HomeFragment extends BaseHomeFragment<HomePresenter> implements Hom
         // 设置设置布局内每行布局的宽与高的比
         gridLayoutHelperbrand.setAspectRatio(10);
         //设置每行中 每个网格宽度 占 每行总宽度 的比例
-        gridLayoutHelperbrand.setWeights(new float[]{20, 20, 20, 20,20});
+        gridLayoutHelperbrand.setWeights(new float[]{20, 20, 20, 20, 20});
         // 控制子元素之间的垂直间距
         gridLayoutHelperbrand.setVGap(10);
         // 控制子元素之间的水平间距
@@ -161,14 +159,14 @@ public class HomeFragment extends BaseHomeFragment<HomePresenter> implements Hom
         gridLayoutHelperbrand.setAutoExpand(false);
         // 设置每行多少个网格
         gridLayoutHelperbrand.setSpanCount(2);
-        //brand适配器
+        //brand适配器图片
         homeBrandImgMadapter = new HomeBrandImgMadapter(getActivity(), brandlist, gridLayoutHelperbrand);
 
     }
 
     private void album() {
         //设置兰格布局
-        columnLayoutHelperalbum = new ColumnLayoutHelper();
+        ColumnLayoutHelper columnLayoutHelperalbum = new ColumnLayoutHelper();
         //columnLayoutHelper.setItemCount(5);// 设置布局里Item个数
         //columnLayoutHelper.setPadding(20, 20, 20, 20);// 设置LayoutHelper的子元素相对LayoutHelper边缘的距离
         columnLayoutHelperalbum.setMargin(20, 20, 20, 20);// 设置LayoutHelper边缘相对父控件（即RecyclerView）的距离
@@ -176,12 +174,11 @@ public class HomeFragment extends BaseHomeFragment<HomePresenter> implements Hom
         columnLayoutHelperalbum.setAspectRatio(5);// 设置设置布局内每行布局的宽与高的比
         //album适配器
         homeAlbumMadapter = new HomeAlbumMadapter(getActivity(), albumlist, columnLayoutHelperalbum);
-
     }
 
     private void banner() {
         //设置通栏布局
-        singleLayoutHelperBanner = new SingleLayoutHelper();
+        SingleLayoutHelper singleLayoutHelperBanner = new SingleLayoutHelper();
         singleLayoutHelperBanner.setItemCount(2);
         //banner适配器
         homeBannerMadapter = new HomeBannerMadapter(getActivity(), bannerlist, singleLayoutHelperBanner);
@@ -190,7 +187,7 @@ public class HomeFragment extends BaseHomeFragment<HomePresenter> implements Hom
     private void seek() {
         //设置通栏布局 搜索
         //设置兰格布局
-        columnLayoutHelperseek = new ColumnLayoutHelper();
+        ColumnLayoutHelper columnLayoutHelperseek = new ColumnLayoutHelper();
         //columnLayoutHelper.setItemCount(5);// 设置布局里Item个数
         //columnLayoutHelper.setPadding(20, 20, 20, 20);// 设置LayoutHelper的子元素相对LayoutHelper边缘的距离
         columnLayoutHelperseek.setMargin(20, 20, 20, 20);// 设置LayoutHelper边缘相对父控件（即RecyclerView）的距离
@@ -219,6 +216,7 @@ public class HomeFragment extends BaseHomeFragment<HomePresenter> implements Hom
         delegateAdapter.addAdapter(homeBrandImgMadapter);
         delegateAdapter.addAdapter(homeBrandTextMadapter);
 
+
         //布局管理器
 //        mViewHomeRv.setLayoutManager(virtualLayoutManager);
         //绑定适配器
@@ -242,8 +240,6 @@ public class HomeFragment extends BaseHomeFragment<HomePresenter> implements Hom
             brandlist.addAll(brandList);
             homeBrandImgMadapter.notifyDataSetChanged();
             homeBrandTextMadapter.notifyDataSetChanged();
-
-
 
 
         }

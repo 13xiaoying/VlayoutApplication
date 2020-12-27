@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.alibaba.android.vlayout.DelegateAdapter;
 import com.alibaba.android.vlayout.LayoutHelper;
 import com.alibaba.android.vlayout.layout.GridLayoutHelper;
+import com.alibaba.android.vlayout.layout.LinearLayoutHelper;
 import com.alibaba.android.vlayout.layout.SingleLayoutHelper;
 import com.bumptech.glide.Glide;
 import com.example.vlayoutapplication.R;
@@ -22,16 +23,18 @@ import java.util.ArrayList;
 
 public class HomeBrandTextMadapter extends DelegateAdapter.Adapter {
     private Context context;
-    private SingleLayoutHelper singleLayoutHelper;
+    private String name;
+    private LayoutHelper LayoutHelper;
 
-    public HomeBrandTextMadapter(Context context, SingleLayoutHelper singleLayoutHelper) {
+    public HomeBrandTextMadapter(Context context, String name, LayoutHelper LayoutHelper) {
         this.context = context;
-        this.singleLayoutHelper = singleLayoutHelper;
+        this.name = name;
+        this.LayoutHelper = LayoutHelper;
     }
 
     @Override
     public LayoutHelper onCreateLayoutHelper() {
-        return singleLayoutHelper;
+        return LayoutHelper;
     }
 
     @NonNull
@@ -44,7 +47,7 @@ public class HomeBrandTextMadapter extends DelegateAdapter.Adapter {
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         TextViewHolder textViewHolder= (TextViewHolder) holder;
-        textViewHolder.text.setText("品牌制造商直供");
+        textViewHolder.text.setText(name);
     }
 
     @Override
