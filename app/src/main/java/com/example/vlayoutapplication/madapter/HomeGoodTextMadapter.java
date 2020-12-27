@@ -53,7 +53,7 @@ public class HomeGoodTextMadapter extends DelegateAdapter.Adapter {
     @Override
     public int getItemCount() {
         if(goodlist.size()>0){
-            return goodlist.size();
+            return 1;
         }else{
             return 0;
         }

@@ -26,6 +26,8 @@ import com.example.vlayoutapplication.madapter.HomeBrandImgMadapter;
 import com.example.vlayoutapplication.madapter.HomeBrandTextMadapter;
 import com.example.vlayoutapplication.madapter.HomeGoodImgMadapter;
 import com.example.vlayoutapplication.madapter.HomeGoodTextMadapter;
+import com.example.vlayoutapplication.madapter.HomeHotGoodsImgMadapter;
+import com.example.vlayoutapplication.madapter.HomeHotGoodsTextMadapter;
 import com.example.vlayoutapplication.madapter.HomeSeekMadapter;
 import com.example.vlayoutapplication.presenter.HomePresenter;
 
@@ -49,6 +51,7 @@ public class HomeFragment extends BaseHomeFragment<HomePresenter> implements Hom
     private ArrayList<HomeBannerBean.DataBean.NewGoodsListBean> goodlist;
     private HomeGoodImgMadapter homeGoodImgMadapter;
     private HomeGoodTextMadapter homeGoodTextMadapter;
+    private ArrayList<HomeBannerBean.DataBean.HotGoodsListBean> hotgoodslist;
 
     @Override
     public void initView(@NonNull final View itemView) {
@@ -61,7 +64,7 @@ public class HomeFragment extends BaseHomeFragment<HomePresenter> implements Hom
         albumlist = new ArrayList<>();//album
         brandlist = new ArrayList<>();//brand
         goodlist = new ArrayList<>();//goodlist
-
+        hotgoods = new ArrayList<>();//hotgoods
 
 
         virtualLayoutManager = new VirtualLayoutManager(getActivity());
@@ -85,6 +88,8 @@ public class HomeFragment extends BaseHomeFragment<HomePresenter> implements Hom
         brandImg();
         goodText();
         goodImg();
+        hotgoodText();
+        hotgoodImg();
 
         //singleLayoutHelper.setItemCount(3);// 设置布局里Item个数
         //singleLayoutHelper.setPadding(20, 20, 20, 20);// 设置LayoutHelper的子元素相对LayoutHelper边缘的距离
@@ -134,9 +139,63 @@ public class HomeFragment extends BaseHomeFragment<HomePresenter> implements Hom
 
         madapter();
     }
+    //人气推荐
+    private void hotgoodImg() {
+        GridLayoutHelper gridLayoutHelpergood = new GridLayoutHelper(1);
+        // 设置布局里Item个数
+        gridLayoutHelpergood.setItemCount(3);
+        // 设置布局里Item个数
+        //gridLayoutHelperbrand.setItemCount(2);
+        // 设置LayoutHelper的子元素相对LayoutHelper边缘的距离
+        //gridLayoutHelperbrand.setPadding(30, 6, 6, 6);
+        // 设置LayoutHelper边缘相对父控件（即RecyclerView）的距离
+        //gridLayoutHelperbrand.setMargin(30, 6, 6, 6);
+        // 设置背景颜色
+        //gridLayoutHelperbrand.setBgColor(Color.GREEN);
+        // 设置设置布局内每行布局的宽与高的比
+        //gridLayoutHelperbrand.setAspectRatio(10);
+        //设置每行中 每个网格宽度 占 每行总宽度 的比例
+        //gridLayoutHelperbrand.setWeights(new float[]{40, 40, 40, 40});
+        // 控制子元素之间的垂直间距
+        //gridLayoutHelperbrand.setVGap(10);
+        // 控制子元素之间的水平间距
+        //gridLayoutHelperbrand.setHGap(10);
+        //是否自动填充空白区域
+        //gridLayoutHelperbrand.setAutoExpand(false);
+        // 设置每行多少个网格
+        //gridLayoutHelperbrand.setSpanCount(2);
+        //brand适配器图片
+        gridLayoutHelpergood.setAutoExpand(true);
+        //homeGoodImgMadapter = new HomeHotGoodsImgMadapter(getActivity(), goodlist, gridLayoutHelpergood);
+    }
 
+    private void hotgoodText() {
+        SingleLayoutHelper singleLayoutHelpergood = new SingleLayoutHelper();
+        singleLayoutHelpergood.setItemCount(1);
+        singleLayoutHelpergood.setAspectRatio(6);
+        singleLayoutHelpergood.setMarginTop(6);
+        //brand适配器文字
+        String text = "人气推荐";
+        //homeGoodTextMadapter = new HomeHotGoodsTextMadapter(getActivity(), goodlist, text, singleLayoutHelpergood);
+    }
+
+
+    //周一周四·新品首发
+    //good - text
+    private void goodText() {
+        SingleLayoutHelper singleLayoutHelpergood = new SingleLayoutHelper();
+        singleLayoutHelpergood.setItemCount(1);
+        singleLayoutHelpergood.setAspectRatio(6);
+        singleLayoutHelpergood.setMarginTop(6);
+        //brand适配器文字
+        String text = "周一周四·新品首发";
+        homeGoodTextMadapter = new HomeGoodTextMadapter(getActivity(), goodlist, text, singleLayoutHelpergood);
+    }
+    //good - img
     private void goodImg() {
         GridLayoutHelper gridLayoutHelpergood = new GridLayoutHelper(2);
+        // 设置布局里Item个数
+        gridLayoutHelpergood.setItemCount(2);
         // 设置布局里Item个数
         //gridLayoutHelperbrand.setItemCount(2);
         // 设置LayoutHelper的子元素相对LayoutHelper边缘的距离
@@ -161,17 +220,8 @@ public class HomeFragment extends BaseHomeFragment<HomePresenter> implements Hom
         gridLayoutHelpergood.setAutoExpand(true);
         homeGoodImgMadapter = new HomeGoodImgMadapter(getActivity(), goodlist, gridLayoutHelpergood);
     }
-
-    private void goodText() {
-        SingleLayoutHelper singleLayoutHelperbrand = new SingleLayoutHelper();
-        singleLayoutHelperbrand.setItemCount(1);
-        singleLayoutHelperbrand.setAspectRatio(6);
-        singleLayoutHelperbrand.setMarginTop(6);
-        //brand适配器文字
-        String text = "周一周四·新品首发";
-        homeGoodTextMadapter = new HomeGoodTextMadapter(getActivity(), goodlist, text, singleLayoutHelperbrand);
-    }
-
+    //品牌制造商直供
+    //bradn - text
     private void brandText() {
         SingleLayoutHelper singleLayoutHelperbrand = new SingleLayoutHelper();
         singleLayoutHelperbrand.setItemCount(1);
@@ -179,9 +229,9 @@ public class HomeFragment extends BaseHomeFragment<HomePresenter> implements Hom
         singleLayoutHelperbrand.setMarginTop(6);
         //brand适配器文字
         String text = "品牌制造商直供";
-        homeBrandTextMadapter = new HomeBrandTextMadapter(getActivity(), text,brandlist, singleLayoutHelperbrand);
+        homeBrandTextMadapter = new HomeBrandTextMadapter(getActivity(), text, brandlist, singleLayoutHelperbrand);
     }
-
+    //brand - img
     private void brandImg() {
         GridLayoutHelper gridLayoutHelperbrand = new GridLayoutHelper(2);
         // 设置布局里Item个数
@@ -208,7 +258,7 @@ public class HomeFragment extends BaseHomeFragment<HomePresenter> implements Hom
         gridLayoutHelperbrand.setAutoExpand(true);
         homeBrandImgMadapter = new HomeBrandImgMadapter(getActivity(), brandlist, gridLayoutHelperbrand);
     }
-
+    //album
     private void album() {
         //设置兰格布局
         ColumnLayoutHelper columnLayoutHelperalbum = new ColumnLayoutHelper();
@@ -220,17 +270,17 @@ public class HomeFragment extends BaseHomeFragment<HomePresenter> implements Hom
         //album适配器
         homeAlbumMadapter = new HomeAlbumMadapter(getActivity(), albumlist, columnLayoutHelperalbum);
     }
-
+    //banner
     private void banner() {
         //设置通栏布局
         ColumnLayoutHelper columnLayoutHelperBanner = new SingleLayoutHelper();
         columnLayoutHelperBanner.setItemCount(1);
         //banner适配器
-        homeBannerMadapter = new HomeBannerMadapter(getActivity(), bannerlist,columnLayoutHelperBanner);
+        homeBannerMadapter = new HomeBannerMadapter(getActivity(), bannerlist, columnLayoutHelperBanner);
     }
-
+    //搜索
     private void seek() {
-        //设置通栏布局 搜索
+        //设置通栏布局
         //设置兰格布局
         ColumnLayoutHelper columnLayoutHelperseek = new ColumnLayoutHelper();
         //columnLayoutHelper.setItemCount(5);// 设置布局里Item个数
@@ -277,7 +327,7 @@ public class HomeFragment extends BaseHomeFragment<HomePresenter> implements Hom
 
     @Override
     public void onInit(HomeBannerBean bean) {
-        Log.i(TAG, "onInit: "+bean.toString());
+        Log.i(TAG, "onInit: " + bean.toString());
         if (bean != null) {
             homeSeekMadapter.notifyDataSetChanged();
 
@@ -297,10 +347,9 @@ public class HomeFragment extends BaseHomeFragment<HomePresenter> implements Hom
             List<HomeBannerBean.DataBean.NewGoodsListBean> newGoodsList = bean.getData().getNewGoodsList();
             goodlist.addAll(newGoodsList);
             homeGoodImgMadapter.notifyDataSetChanged();
-            homeGoodImgMadapter.notifyDataSetChanged();
+            homeGoodTextMadapter.notifyDataSetChanged();
 
-            
-
+            Log.i("goodlist", "onInit: good"+newGoodsList.toString());
         }
     }
 

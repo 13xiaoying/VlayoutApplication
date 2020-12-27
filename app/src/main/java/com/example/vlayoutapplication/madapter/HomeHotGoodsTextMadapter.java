@@ -4,7 +4,6 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -12,20 +11,21 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.alibaba.android.vlayout.DelegateAdapter;
 import com.alibaba.android.vlayout.LayoutHelper;
-import com.bumptech.glide.Glide;
 import com.example.vlayoutapplication.R;
 import com.example.vlayoutapplication.bean.HomeBannerBean;
 
 import java.util.ArrayList;
 
-public class HomeGoodImgMadapter extends DelegateAdapter.Adapter {
+public class HomeHotGoodsTextMadapter extends DelegateAdapter.Adapter  {
     private Context context;
-    private ArrayList<HomeBannerBean.DataBean.NewGoodsListBean> goodlist;
+    private ArrayList<HomeBannerBean.DataBean.HotGoodsListBean> hotgoodslist;
+    private String name;
     private LayoutHelper layoutHelper;
 
-    public HomeGoodImgMadapter(Context context, ArrayList<HomeBannerBean.DataBean.NewGoodsListBean> goodlist, LayoutHelper layoutHelper) {
+    public HomeHotGoodsTextMadapter(Context context, ArrayList<HomeBannerBean.DataBean.HotGoodsListBean> hotgoodslist, String name, LayoutHelper layoutHelper) {
         this.context = context;
-        this.goodlist = goodlist;
+        this.hotgoodslist = hotgoodslist;
+        this.name = name;
         this.layoutHelper = layoutHelper;
     }
 
@@ -37,34 +37,31 @@ public class HomeGoodImgMadapter extends DelegateAdapter.Adapter {
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View inflate = LayoutInflater.from(context).inflate(R.layout.item_good_img, parent, false);
+        View inflate = LayoutInflater.from(context).inflate(R.layout.item_hotgoods_text, parent, false);
         return new ViewHolder(inflate);
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        HomeBannerBean.DataBean.NewGoodsListBean newGoodsListBean = goodlist.get(position);
-        ViewHolder viewHolder = (ViewHolder) holder;
-        viewHolder.text_good_weight.setText(newGoodsListBean.getName());
-        viewHolder.text_good_price.setText("￥ "+newGoodsListBean.getRetail_price());
-        Glide.with(context).load(newGoodsListBean.getList_pic_url()).into(viewHolder.img_good);
+        //HomeBannerBean.DataBean.NewGoodsListBean newGoodsListBean = goodlist.get(position);
+        ViewHolder viewHolder= (ViewHolder) holder;
+        viewHolder.text_hotgoods.setText(name);
     }
 
     @Override
     public int getItemCount() {
-        return goodlist.size();
+        if(hotgoodslist.size()>0){
+            return 1;
+        }else{
+            return 0;
+        }
     }
 
     private class ViewHolder extends RecyclerView.ViewHolder {
-        ImageView img_good;
-        TextView text_good_weight;
-        TextView text_good_price;
-
+        TextView text_hotgoods;
         public ViewHolder(View inflate) {
             super(inflate);
-            img_good = inflate.findViewById(R.id.iv_good);
-            text_good_weight = inflate.findViewById(R.id.tv_good_weight);
-            text_good_price = inflate.findViewById(R.id.tv_good_price);
+            text_hotgoods=inflate.findViewById(R.id.tv_hotgoods_text);
         }
     }
 }
