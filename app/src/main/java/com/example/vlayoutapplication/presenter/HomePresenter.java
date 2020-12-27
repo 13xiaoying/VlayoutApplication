@@ -11,7 +11,7 @@ import com.example.vlayoutapplication.model.HomeBannerModel;
 import com.example.vlayoutapplication.util.net.IneterCallBack;
 import com.example.vlayoutapplication.util.net.UrlContstant;
 
-public class HomePresenter<V extends HomeContract.CHomeView> extends BasePresenter<V, HomeContract.CHomeModel> implements HomeContract.CHomePresenter, BaseView {
+public class HomePresenter extends BasePresenter<HomeContract.CHomeView,HomeBannerModel> implements HomeContract.CHomePresenter, BaseView {
 
 
     @Override
@@ -30,8 +30,9 @@ public class HomePresenter<V extends HomeContract.CHomeView> extends BasePresent
     }
 
     private static final String TAG = "HomePresenter";
+
     @Override
-    public HomeContract.CHomeModel getModel() {
+    public HomeBannerModel getModel() {
         return new HomeBannerModel();
     }
 }

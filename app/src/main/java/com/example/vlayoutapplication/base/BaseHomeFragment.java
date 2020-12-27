@@ -12,8 +12,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
-public abstract class BaseHomeFragment<T extends BasePresenter> extends Fragment implements BaseView {
-    public T presenter;
+public abstract class BaseHomeFragment<P extends BasePresenter> extends Fragment implements BaseView {
+    public P presenter;
 
     @Nullable
     @Override
@@ -40,5 +40,5 @@ public abstract class BaseHomeFragment<T extends BasePresenter> extends Fragment
 
     public abstract int getIcount();
 
-    public abstract T getInterface();
+    public abstract P getInterface();
 }

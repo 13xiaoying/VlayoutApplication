@@ -83,7 +83,7 @@ public class MainActivity extends BaseMainActivity<HomePresenter> implements Vie
 
     @Override
     public HomePresenter getInterface() {
-        return new HomePresenter(this);
+        return new HomePresenter();
     }
     @Override
     public void initView() {
@@ -159,12 +159,6 @@ public class MainActivity extends BaseMainActivity<HomePresenter> implements Vie
     public void onInit(HomeBannerBean bean) {
 
     }
-
-    @Override
-    public void onInit1(HomeBean bean) {
-
-    }
-
     @Override
     public void onError(String error) {
 

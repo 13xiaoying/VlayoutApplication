@@ -1,6 +1,7 @@
 package com.example.vlayoutapplication.madapter;
 
 import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -33,13 +34,13 @@ public class HomeBannerMadapter extends DelegateAdapter.Adapter {
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View inflate = View.inflate(context, R.layout.item_banner, null);
-        return new ViewHolder(inflate);
+        View view = LayoutInflater.from(context).inflate(R.layout.item_banner, parent, false);
+        return new ViewHolde(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        ViewHolder viewHolder= (ViewHolder) holder;
+        ViewHolde viewHolder= (ViewHolde) holder;
         viewHolder.banner.setImages(list).setImageLoader(new ImageLoader() {
             @Override
             public void displayImage(Context context, Object path, ImageView imageView) {
@@ -57,7 +58,11 @@ public class HomeBannerMadapter extends DelegateAdapter.Adapter {
 
     @Override
     public int getItemCount() {
-        return list.size();
+        if (list.size()>0){
+            return 1;
+        }else {
+            return 0;
+        }
     }
 
     @Override
@@ -65,9 +70,10 @@ public class HomeBannerMadapter extends DelegateAdapter.Adapter {
         return singleLayoutHelper;
     }
 
-    private class ViewHolder extends RecyclerView.ViewHolder {
+    private class ViewHolde extends RecyclerView.ViewHolder {
         Banner banner;
-        public ViewHolder(@NonNull View itemView) {
+
+        public ViewHolde(@NonNull View itemView) {
             super(itemView);
             banner=itemView.findViewById(R.id.banner_home);
         }

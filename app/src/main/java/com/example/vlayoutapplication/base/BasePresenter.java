@@ -7,7 +7,7 @@ public abstract class BasePresenter<T extends BaseView,M extends IBaseModel> {
     public M model;
     public void attachView(T v) {
         iView=v;
-
+        model=getModel();
     }
     public abstract M getModel();
     public void detchView(){
