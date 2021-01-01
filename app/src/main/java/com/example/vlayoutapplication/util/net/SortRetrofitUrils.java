@@ -15,37 +15,36 @@ import okhttp3.ResponseBody;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
-public class RetrofitUrils implements InterWorkInterface {
-    public static RetrofitUrils retrofitUrils;
+public class SortRetrofitUrils implements InterWorkInterface {
+    public static SortRetrofitUrils sortRetrofitUrils;
     private final ApiServer apiServer;
 
-    public RetrofitUrils() {
+    public SortRetrofitUrils() {
         Retrofit build = new Retrofit.Builder()
-                .baseUrl(UrlContstant.baseurl)
+                .baseUrl(UrlContstant.sorturl)
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build();
 
         apiServer = build.create(ApiServer.class);
     }
 
-    public static RetrofitUrils getInstance() {
-        if (retrofitUrils == null) {
-            synchronized (RetrofitUrils.class) {
-                if (retrofitUrils == null) {
-                    retrofitUrils = new RetrofitUrils();
+    public static SortRetrofitUrils getInstance() {
+        if (sortRetrofitUrils == null) {
+            synchronized (HomeRetrofitUrils.class) {
+                if (sortRetrofitUrils == null) {
+                    sortRetrofitUrils = new SortRetrofitUrils();
                 }
             }
         }
-        return retrofitUrils;
+        return sortRetrofitUrils;
     }
-
 
     @Override
     public <T> void get(String url, final IneterCallBack<T> callBack) {
         apiServer.get(url)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                 .subscribe(new Observer<ResponseBody>() {
+                .subscribe(new Observer<ResponseBody>() {
                     @Override
                     public void onSubscribe(Disposable d) {
 

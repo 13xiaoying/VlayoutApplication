@@ -9,6 +9,8 @@ public class UrlContstant {
     //
     //public static String w=baseurl+"api/catalog/index";
 
-
+    //sort
+    public static String sorturl="https://cdplay.cn/api/";
+    public static String sort=sorturl+"topic/list?size=10&page=";
 
 }
