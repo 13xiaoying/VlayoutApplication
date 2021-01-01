@@ -1,4 +1,4 @@
-package com.example.vlayoutapplication.madapter;
+package com.example.vlayoutapplication.homemadapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -11,8 +11,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.alibaba.android.vlayout.DelegateAdapter;
 import com.alibaba.android.vlayout.LayoutHelper;
-import com.alibaba.android.vlayout.layout.ColumnLayoutHelper;
-import com.alibaba.android.vlayout.layout.SingleLayoutHelper;
 import com.bumptech.glide.Glide;
 import com.example.vlayoutapplication.R;
 import com.example.vlayoutapplication.bean.HomeBannerBean;

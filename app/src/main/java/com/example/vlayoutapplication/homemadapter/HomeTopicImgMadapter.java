@@ -1,4 +1,4 @@
-package com.example.vlayoutapplication.madapter;
+package com.example.vlayoutapplication.homemadapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -10,29 +10,21 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.alibaba.android.vlayout.DelegateAdapter;
-import com.alibaba.android.vlayout.LayoutHelper;
 import com.bumptech.glide.Glide;
 import com.example.vlayoutapplication.R;
 import com.example.vlayoutapplication.bean.HomeBannerBean;
 
 import java.util.ArrayList;
 
-public class HomeTopicImgMadapter extends DelegateAdapter.Adapter {
+public class HomeTopicImgMadapter extends RecyclerView.Adapter {
     private Context context;
     private ArrayList<HomeBannerBean.DataBean.TopicListBean> topiclist;
-    private LayoutHelper layoutHelper;
 
-    public HomeTopicImgMadapter(Context context, ArrayList<HomeBannerBean.DataBean.TopicListBean> topiclist, LayoutHelper layoutHelper) {
+    public HomeTopicImgMadapter(Context context, ArrayList<HomeBannerBean.DataBean.TopicListBean> topiclist) {
         this.context = context;
         this.topiclist = topiclist;
-        this.layoutHelper = layoutHelper;
     }
 
-    @Override
-    public LayoutHelper onCreateLayoutHelper() {
-        return layoutHelper;
-    }
 
     @NonNull
     @Override
@@ -53,7 +45,7 @@ public class HomeTopicImgMadapter extends DelegateAdapter.Adapter {
 
     @Override
     public int getItemCount() {
-        if(topiclist.size()>0){
+        if(topiclist!=null){
             return topiclist.size();
         }else{
             return 0;

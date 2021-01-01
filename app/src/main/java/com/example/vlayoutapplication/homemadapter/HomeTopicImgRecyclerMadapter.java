@@ -1,12 +1,12 @@
-package com.example.vlayoutapplication.madapter;
+package com.example.vlayoutapplication.homemadapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.alibaba.android.vlayout.DelegateAdapter;
@@ -16,17 +16,16 @@ import com.example.vlayoutapplication.bean.HomeBannerBean;
 
 import java.util.ArrayList;
 
-public class HomeTopicTextMadapter extends DelegateAdapter.Adapter {
+public class HomeTopicImgRecyclerMadapter extends DelegateAdapter.Adapter {
     private Context context;
-    private ArrayList<HomeBannerBean.DataBean.TopicListBean> topiclist;
-    private String name;
     private LayoutHelper layoutHelper;
+    private ArrayList<HomeBannerBean.DataBean.TopicListBean> topiclist;
+    private HomeTopicImgMadapter homeTopicImgMadapter;
 
-    public HomeTopicTextMadapter(Context context, ArrayList<HomeBannerBean.DataBean.TopicListBean> topiclist, String name, LayoutHelper layoutHelper) {
+    public HomeTopicImgRecyclerMadapter(Context context, LayoutHelper layoutHelper, ArrayList<HomeBannerBean.DataBean.TopicListBean> topiclist) {
         this.context = context;
-        this.topiclist = topiclist;
-        this.name = name;
         this.layoutHelper = layoutHelper;
+        this.topiclist = topiclist;
     }
 
     @Override
@@ -37,32 +36,34 @@ public class HomeTopicTextMadapter extends DelegateAdapter.Adapter {
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View inflate = LayoutInflater.from(context).inflate(R.layout.item_topic_text, parent, false);
+        View inflate = LayoutInflater.from(context).inflate(R.layout.item_topic_recycler, parent, false);
         return new ViewHolder(inflate);
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        //HomeBannerBean.DataBean.NewGoodsListBean newGoodsListBean = goodlist.get(position);
-        ViewHolder viewHolder = (ViewHolder) holder;
-        viewHolder.text_topic.setText(name);
+        ViewHolder viewHolder= (ViewHolder) holder;
+        homeTopicImgMadapter = new HomeTopicImgMadapter(context, topiclist);
+        viewHolder.recyclerView.setAdapter(homeTopicImgMadapter);
+        LinearLayoutManager layout = new LinearLayoutManager(context);
+        layout.setOrientation(RecyclerView.HORIZONTAL);
+        viewHolder.recyclerView.setLayoutManager(layout);
     }
 
     @Override
     public int getItemCount() {
-        if (topiclist.size() > 0) {
+        if(topiclist.size()>0){
             return 1;
-        } else {
+        }else{
             return 0;
         }
     }
 
     private class ViewHolder extends RecyclerView.ViewHolder {
-        TextView text_topic;
-
+        RecyclerView recyclerView;
         public ViewHolder(View inflate) {
             super(inflate);
-            text_topic = inflate.findViewById(R.id.tv_topic);
+            recyclerView=inflate.findViewById(R.id.rv_view_topic);
         }
     }
 }

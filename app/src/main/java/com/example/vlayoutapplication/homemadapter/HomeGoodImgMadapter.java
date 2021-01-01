@@ -1,4 +1,4 @@
-package com.example.vlayoutapplication.madapter;
+package com.example.vlayoutapplication.homemadapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;

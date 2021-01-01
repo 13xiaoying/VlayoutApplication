@@ -1,4 +1,4 @@
-package com.example.vlayoutapplication.madapter;
+package com.example.vlayoutapplication.homemadapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.alibaba.android.vlayout.DelegateAdapter;
 import com.alibaba.android.vlayout.LayoutHelper;
-import com.bumptech.glide.Glide;
 import com.example.vlayoutapplication.R;
 import com.example.vlayoutapplication.bean.HomeBannerBean;
 
@@ -20,10 +19,10 @@ import java.util.ArrayList;
 
 public class HomeDietMadapter extends DelegateAdapter.Adapter {
     private Context context;
-    private ArrayList<HomeBannerBean.DataBean.CategoryListBean.GoodsListBean> dietlist;
+    private ArrayList<HomeBannerBean.DataBean.CategoryListBean> dietlist;
     private LayoutHelper layoutHelper;
 
-    public HomeDietMadapter(Context context, ArrayList<HomeBannerBean.DataBean.CategoryListBean.GoodsListBean> dietlist, LayoutHelper layoutHelper) {
+    public HomeDietMadapter(Context context, ArrayList<HomeBannerBean.DataBean.CategoryListBean> dietlist, LayoutHelper layoutHelper) {
         this.context = context;
         this.dietlist = dietlist;
         this.layoutHelper = layoutHelper;
@@ -43,11 +42,11 @@ public class HomeDietMadapter extends DelegateAdapter.Adapter {
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        HomeBannerBean.DataBean.CategoryListBean.GoodsListBean goodsListBean = dietlist.get(position);
+        HomeBannerBean.DataBean.CategoryListBean goodsListBean = dietlist.get(position);
         ViewHolder viewHolder= (ViewHolder) holder;
-        Glide.with(context).load(goodsListBean.getList_pic_url()).into(viewHolder.img_diet);
+        //Glide.with(context).load(goodsListBean.getList_pic_url()).into(viewHolder.img_diet);
         viewHolder.text_name.setText(goodsListBean.getName());
-        viewHolder.text_price.setText("￥ "+goodsListBean.getRetail_price());
+        //viewHolder.text_price.setText("￥ "+goodsListBean.getRetail_price());
     }
 
     @Override

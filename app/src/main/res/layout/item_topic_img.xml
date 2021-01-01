@@ -1,45 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
 
-    <androidx.recyclerview.widget.RecyclerView
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <ImageView
             android:id="@+id/iv_topic"
-            android:layout_width="350dp"
-            android:layout_height="230dp"
-            android:layout_centerHorizontal="true"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_margin="10dp"
             android:src="@drawable/ic_ion9" />
 
         <TextView
             android:id="@+id/tv_topic_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/iv_good"
-            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="50dp"
+            android:layout_below="@id/iv_topic"
             android:layout_marginTop="30dp"
-            android:text="123" />
+            android:text="123"
+            android:textSize="14sp" />
 
         <TextView
             android:id="@+id/tv_topic_price"
-            android:layout_toRightOf="@id/tv_good_weight"
-            android:layout_marginLeft="5dp"
-            android:text="123"
-            android:layout_alignTop="@id/tv_good_weight"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#FF0000" />
+            android:layout_below="@id/iv_topic"
+            android:layout_alignTop="@id/tv_topic_title"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@id/tv_topic_title"
+            android:text="1123"
+            android:textColor="#FF0000"
+            android:textSize="14sp" />
 
         <TextView
             android:id="@+id/tv_topic_sale"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/tv_good_weight"
+            android:layout_alignLeft="@id/tv_topic_title"
+            android:layout_below="@id/tv_topic_title"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="10dp"
-            android:text="123" />
-    </androidx.recyclerview.widget.RecyclerView>
+            android:text="123"
+            android:textSize="14sp" />
+    </RelativeLayout>
 
-</RelativeLayout>
+</LinearLayout>

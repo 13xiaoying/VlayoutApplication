@@ -1,4 +1,4 @@
-package com.example.vlayoutapplication.madapter;
+package com.example.vlayoutapplication.homemadapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -12,20 +12,19 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.alibaba.android.vlayout.DelegateAdapter;
 import com.alibaba.android.vlayout.LayoutHelper;
-import com.bumptech.glide.Glide;
 import com.example.vlayoutapplication.R;
 import com.example.vlayoutapplication.bean.HomeBannerBean;
 
 import java.util.ArrayList;
 
-public class HomeBadyMadapter extends DelegateAdapter.Adapter {
+public class HomeKitchenMadapter extends DelegateAdapter.Adapter {
     private Context context;
-    private ArrayList<HomeBannerBean.DataBean.CategoryListBean.GoodsListBean> badylist;
+    private ArrayList<HomeBannerBean.DataBean.CategoryListBean> kitchenlist;
     private LayoutHelper layoutHelper;
 
-    public HomeBadyMadapter(Context context, ArrayList<HomeBannerBean.DataBean.CategoryListBean.GoodsListBean> badylist, LayoutHelper layoutHelper) {
+    public HomeKitchenMadapter(Context context, ArrayList<HomeBannerBean.DataBean.CategoryListBean> kitchenlist, LayoutHelper layoutHelper) {
         this.context = context;
-        this.badylist = badylist;
+        this.kitchenlist = kitchenlist;
         this.layoutHelper = layoutHelper;
     }
 
@@ -37,38 +36,38 @@ public class HomeBadyMadapter extends DelegateAdapter.Adapter {
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View inflate = LayoutInflater.from(context).inflate(R.layout.item_bady, parent, false);
+        View inflate = LayoutInflater.from(context).inflate(R.layout.item_kitchen, parent, false);
         return new ViewHolder(inflate);
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        HomeBannerBean.DataBean.CategoryListBean.GoodsListBean goodsListBean = badylist.get(position);
+        HomeBannerBean.DataBean.CategoryListBean goodsListBean = kitchenlist.get(position);
         ViewHolder viewHolder= (ViewHolder) holder;
-        Glide.with(context).load(goodsListBean.getList_pic_url()).into(viewHolder.img_bady);
+        //Glide.with(context).load(goodsListBean.getList_pic_url()).into(viewHolder.img_kitchen);
         viewHolder.text_name.setText(goodsListBean.getName());
-        viewHolder.text_price.setText("￥ "+goodsListBean.getRetail_price());
+        //viewHolder.text_price.setText("￥ "+goodsListBean.getRetail_price());
     }
 
     @Override
     public int getItemCount() {
-        if(badylist.size()>0){
-            return badylist.size();
+        if(kitchenlist.size()>0){
+            return kitchenlist.size();
         }else{
             return 0;
         }
     }
 
     private class ViewHolder extends RecyclerView.ViewHolder {
-        ImageView img_bady;
+        ImageView img_kitchen;
         TextView text_name;
         TextView text_price;
 
         public ViewHolder(View inflate) {
             super(inflate);
-            img_bady=inflate.findViewById(R.id.iv_bady);
-            text_name=inflate.findViewById(R.id.tv_bady_name);
-            text_price=inflate.findViewById(R.id.tv_bady_price);
+            img_kitchen=inflate.findViewById(R.id.iv_kitchen);
+            text_name=inflate.findViewById(R.id.tv_kitchen_name);
+            text_price=inflate.findViewById(R.id.tv_kitchen_price);
         }
     }
 }

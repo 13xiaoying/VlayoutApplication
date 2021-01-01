@@ -13,28 +13,29 @@ import com.alibaba.android.vlayout.DelegateAdapter;
 import com.alibaba.android.vlayout.VirtualLayoutManager;
 import com.alibaba.android.vlayout.layout.ColumnLayoutHelper;
 import com.alibaba.android.vlayout.layout.GridLayoutHelper;
+import com.alibaba.android.vlayout.layout.LinearLayoutHelper;
 import com.alibaba.android.vlayout.layout.SingleLayoutHelper;
 import com.example.vlayoutapplication.R;
 import com.example.vlayoutapplication.base.BaseHomeFragment;
 import com.example.vlayoutapplication.bean.HomeBannerBean;
 import com.example.vlayoutapplication.contract.HomeContract;
-import com.example.vlayoutapplication.madapter.HomeAlbumMadapter;
-import com.example.vlayoutapplication.madapter.HomeBadyMadapter;
-import com.example.vlayoutapplication.madapter.HomeBannerMadapter;
-import com.example.vlayoutapplication.madapter.HomeBrandImgMadapter;
-import com.example.vlayoutapplication.madapter.HomeBrandTextMadapter;
-import com.example.vlayoutapplication.madapter.HomeClothingMadapter;
-import com.example.vlayoutapplication.madapter.HomeDietMadapter;
-import com.example.vlayoutapplication.madapter.HomeGoodImgMadapter;
-import com.example.vlayoutapplication.madapter.HomeGoodTextMadapter;
-import com.example.vlayoutapplication.madapter.HomeHotGoodsImgMadapter;
-import com.example.vlayoutapplication.madapter.HomeHotGoodsTextMadapter;
-import com.example.vlayoutapplication.madapter.HomeHouseMadapter;
-import com.example.vlayoutapplication.madapter.HomeKitchenMadapter;
-import com.example.vlayoutapplication.madapter.HomePartsMadapter;
-import com.example.vlayoutapplication.madapter.HomeSeekMadapter;
-import com.example.vlayoutapplication.madapter.HomeTopicImgMadapter;
-import com.example.vlayoutapplication.madapter.HomeTopicTextMadapter;
+import com.example.vlayoutapplication.homemadapter.HomeAlbumMadapter;
+import com.example.vlayoutapplication.homemadapter.HomeBadyMadapter;
+import com.example.vlayoutapplication.homemadapter.HomeBannerMadapter;
+import com.example.vlayoutapplication.homemadapter.HomeBrandImgMadapter;
+import com.example.vlayoutapplication.homemadapter.HomeBrandTextMadapter;
+import com.example.vlayoutapplication.homemadapter.HomeClothingMadapter;
+import com.example.vlayoutapplication.homemadapter.HomeDietMadapter;
+import com.example.vlayoutapplication.homemadapter.HomeGoodImgMadapter;
+import com.example.vlayoutapplication.homemadapter.HomeGoodTextMadapter;
+import com.example.vlayoutapplication.homemadapter.HomeHotGoodsImgMadapter;
+import com.example.vlayoutapplication.homemadapter.HomeHotGoodsTextMadapter;
+import com.example.vlayoutapplication.homemadapter.HomeHouseMadapter;
+import com.example.vlayoutapplication.homemadapter.HomeKitchenMadapter;
+import com.example.vlayoutapplication.homemadapter.HomePartsMadapter;
+import com.example.vlayoutapplication.homemadapter.HomeSeekMadapter;
+import com.example.vlayoutapplication.homemadapter.HomeTopicImgRecyclerMadapter;
+import com.example.vlayoutapplication.homemadapter.HomeTopicTextMadapter;
 import com.example.vlayoutapplication.presenter.HomePresenter;
 
 import java.util.ArrayList;
@@ -61,15 +62,15 @@ public class HomeFragment extends BaseHomeFragment<HomePresenter> implements Hom
     private HomeHotGoodsImgMadapter homeHotGoodsImgMadapter;
     private HomeHotGoodsTextMadapter homeHotGoodsTextMadapter;
     private ArrayList<HomeBannerBean.DataBean.TopicListBean> topiclist;
-    private HomeTopicImgMadapter homeTopicImgMadapter;
+    private HomeTopicImgRecyclerMadapter homeTopicImgRecyclerMadapter;
     private HomeTopicTextMadapter homeTopicTextMadapter;
-    private ArrayList<HomeBannerBean.DataBean.CategoryListBean.GoodsListBean> houselist;
+    private ArrayList<HomeBannerBean.DataBean.CategoryListBean> houselist;
+    private ArrayList<HomeBannerBean.DataBean.CategoryListBean> kitchenlist;
+    private ArrayList<HomeBannerBean.DataBean.CategoryListBean> dietlist;
+    private ArrayList<HomeBannerBean.DataBean.CategoryListBean> partslist;
+    private ArrayList<HomeBannerBean.DataBean.CategoryListBean> clothinglist;
+    private ArrayList<HomeBannerBean.DataBean.CategoryListBean> badylist;
     private HomeHouseMadapter homeHouseMadapter;
-    private ArrayList<HomeBannerBean.DataBean.CategoryListBean.GoodsListBean> kitchenlist;
-    private ArrayList<HomeBannerBean.DataBean.CategoryListBean.GoodsListBean> dietlist;
-    private ArrayList<HomeBannerBean.DataBean.CategoryListBean.GoodsListBean> partslist;
-    private ArrayList<HomeBannerBean.DataBean.CategoryListBean.GoodsListBean> clothinglist;
-    private ArrayList<HomeBannerBean.DataBean.CategoryListBean.GoodsListBean> badylist;
     private HomeKitchenMadapter homeKitchenMadapter;
     private HomeBadyMadapter homeBadyMadapter;
     private HomeClothingMadapter homeClothingMadapter;
@@ -126,56 +127,15 @@ public class HomeFragment extends BaseHomeFragment<HomePresenter> implements Hom
         goodImg();
         hotgoodText();
         hotgoodImg();
-        //TopicImg();
-        //TopicText();
-        house();
+        TopicImg();
+        TopicText();
+        title();
+        /*house();
         kitchen();
         diet();
         parts();
         clothing();
-        bady();
-
-         /*//singleLayoutHelper.setItemCount(3);// 设置布局里Item个数
-        //singleLayoutHelper.setPadding(20, 20, 20, 20);// 设置LayoutHelper的子元素相对LayoutHelper边缘的距离
-        //singleLayoutHelper.setMargin(20, 20, 20, 20);// 设置LayoutHelper边缘相对父控件（即RecyclerView）的距离
-        //singleLayoutHelper.setBgColor(Color.GRAY);// 设置背景颜色
-        //singleLayoutHelper.setAspectRatio(3);// 设置设置布局内每行布局的宽与高的比
-
-
-        //columnLayoutHelper特有属性
-        //columnLayoutHelper.setWeights(new float[]{20, 20, 20,20,20});// 设置该行每个Item占该行总宽度的比例
-
-       //设置线性布局
-        linearLayoutHelper = new LinearLayoutHelper();
-        linearLayoutHelper.setItemCount(5);// 设置布局里Item个数
-        linearLayoutHelper.setPadding(10,10,10,10);// 设置LayoutHelper的子元素相对LayoutHelper边缘的距离
-        linearLayoutHelper.setMargin(10,10,10,10);// 设置LayoutHelper边缘相对父控件（即RecyclerView）的距离
-        linearLayoutHelper.setBgColor(Color.GRAY);// 设置背景颜色
-        linearLayoutHelper.setAspectRatio(10);// 设置设置布局内每行布局的宽与高的比
-
-        // linearLayoutHelper特有属性
-        linearLayoutHelper.setDividerHeight(1); // 设置每行Item的距离
-        /*gridLayoutHelper = new GridLayoutHelper(5);
-        // 设置布局里Item个数
-        gridLayoutHelper.setItemCount(6);
-        // 设置LayoutHelper的子元素相对LayoutHelper边缘的距离
-        //gridLayoutHelper.setPadding(30, 6, 6, 6);
-        // 设置LayoutHelper边缘相对父控件（即RecyclerView）的距离
-        //gridLayoutHelper.setMargin(30, 6, 6, 6);
-        // 设置背景颜色
-        gridLayoutHelper.setBgColor(Color.WHITE);
-        // 设置设置布局内每行布局的宽与高的比
-        gridLayoutHelper.setAspectRatio(10);
-        //设置每行中 每个网格宽度 占 每行总宽度 的比例
-        gridLayoutHelper.setWeights(new float[]{20, 20, 20, 20,20});
-        // 控制子元素之间的垂直间距
-        //gridLayoutHelper.setVGap(10);
-        // 控制子元素之间的水平间距
-        gridLayoutHelper.setHGap(10);
-        //是否自动填充空白区域
-        gridLayoutHelper.setAutoExpand(false);
-        // 设置每行多少个网格
-        gridLayoutHelper.setSpanCount(5);*/
+        bady();*/
 
         //设置通栏布局
         SingleLayoutHelper singleLayoutHelper = new SingleLayoutHelper();
@@ -184,15 +144,20 @@ public class HomeFragment extends BaseHomeFragment<HomePresenter> implements Hom
         madapter();
     }
 
+    private void title() {
+        LinearLayoutHelper linearLayoutHelper = new LinearLayoutHelper();
+        homeHouseMadapter = new HomeHouseMadapter(getActivity(), houselist,linearLayoutHelper);
+    }
+
     private void bady() {
-        SingleLayoutHelper singleLayoutHelpertopic = new SingleLayoutHelper();
+        /*SingleLayoutHelper singleLayoutHelpertopic = new SingleLayoutHelper();
         singleLayoutHelpertopic.setItemCount(1);
         singleLayoutHelpertopic.setAspectRatio(6);
         singleLayoutHelpertopic.setMarginTop(6);
         //brand适配器文字
         String text = "婴童";
         homeBadyTextMadapter = new HomeTopicTextMadapter(getActivity(), topiclist, text, singleLayoutHelpertopic);
-
+*/
         GridLayoutHelper gridLayoutHelpergood = new GridLayoutHelper(2);
         // 设置布局里Item个数
         gridLayoutHelpergood.setItemCount(2);
@@ -201,14 +166,14 @@ public class HomeFragment extends BaseHomeFragment<HomePresenter> implements Hom
     }
 
     private void clothing() {
-        SingleLayoutHelper singleLayoutHelpertopic = new SingleLayoutHelper();
+        /*SingleLayoutHelper singleLayoutHelpertopic = new SingleLayoutHelper();
         singleLayoutHelpertopic.setItemCount(1);
         singleLayoutHelpertopic.setAspectRatio(6);
         singleLayoutHelpertopic.setMarginTop(6);
         //brand适配器文字
         String text = "服装";
         homeClothingTextMadapter = new HomeTopicTextMadapter(getActivity(), topiclist, text, singleLayoutHelpertopic);
-
+*/
         GridLayoutHelper gridLayoutHelpergood = new GridLayoutHelper(2);
         // 设置布局里Item个数
         gridLayoutHelpergood.setItemCount(4);
@@ -217,14 +182,14 @@ public class HomeFragment extends BaseHomeFragment<HomePresenter> implements Hom
     }
 
     private void parts() {
-        SingleLayoutHelper singleLayoutHelpertopic = new SingleLayoutHelper();
+        /*SingleLayoutHelper singleLayoutHelpertopic = new SingleLayoutHelper();
         singleLayoutHelpertopic.setItemCount(1);
         singleLayoutHelpertopic.setAspectRatio(6);
         singleLayoutHelpertopic.setMarginTop(6);
         //brand适配器文字
         String text = "配件";
         homePartsTextMadapter = new HomeTopicTextMadapter(getActivity(), topiclist, text, singleLayoutHelpertopic);
-
+*/
         GridLayoutHelper gridLayoutHelpergood = new GridLayoutHelper(2);
         // 设置布局里Item个数
         gridLayoutHelpergood.setItemCount(4);
@@ -233,14 +198,14 @@ public class HomeFragment extends BaseHomeFragment<HomePresenter> implements Hom
     }
 
     private void diet() {
-        SingleLayoutHelper singleLayoutHelpertopic = new SingleLayoutHelper();
+        /*SingleLayoutHelper singleLayoutHelpertopic = new SingleLayoutHelper();
         singleLayoutHelpertopic.setItemCount(1);
         singleLayoutHelpertopic.setAspectRatio(6);
         singleLayoutHelpertopic.setMarginTop(6);
         //brand适配器文字
         String text = "饮品";
         homeDietTextMadapter = new HomeTopicTextMadapter(getActivity(), topiclist, text, singleLayoutHelpertopic);
-
+*/
         GridLayoutHelper gridLayoutHelpergood = new GridLayoutHelper(2);
         // 设置布局里Item个数
         gridLayoutHelpergood.setItemCount(4);
@@ -249,14 +214,14 @@ public class HomeFragment extends BaseHomeFragment<HomePresenter> implements Hom
     }
 
     private void kitchen() {
-        SingleLayoutHelper singleLayoutHelpertopic = new SingleLayoutHelper();
+        /*SingleLayoutHelper singleLayoutHelpertopic = new SingleLayoutHelper();
         singleLayoutHelpertopic.setItemCount(1);
         singleLayoutHelpertopic.setAspectRatio(6);
         singleLayoutHelpertopic.setMarginTop(6);
         //brand适配器文字
         String text = "餐厨";
         homeKitchenTextMadapter = new HomeTopicTextMadapter(getActivity(), topiclist, text, singleLayoutHelpertopic);
-
+*/
         GridLayoutHelper gridLayoutHelpergood = new GridLayoutHelper(2);
         // 设置布局里Item个数
         gridLayoutHelpergood.setItemCount(4);
@@ -265,14 +230,14 @@ public class HomeFragment extends BaseHomeFragment<HomePresenter> implements Hom
     }
 
     private void house() {
-        SingleLayoutHelper singleLayoutHelpertopic = new SingleLayoutHelper();
+        /*SingleLayoutHelper singleLayoutHelpertopic = new SingleLayoutHelper();
         singleLayoutHelpertopic.setItemCount(1);
         singleLayoutHelpertopic.setAspectRatio(6);
         singleLayoutHelpertopic.setMarginTop(6);
         //brand适配器文字
         String text = "居家";
         homeHouseTextMadapter = new HomeTopicTextMadapter(getActivity(), topiclist, text, singleLayoutHelpertopic);
-
+*/
         GridLayoutHelper gridLayoutHelpergood = new GridLayoutHelper(2);
         // 设置布局里Item个数
         gridLayoutHelpergood.setItemCount(4);
@@ -291,18 +256,28 @@ public class HomeFragment extends BaseHomeFragment<HomePresenter> implements Hom
     }
 
     private void TopicImg() {
-        SingleLayoutHelper singleLayoutHelpergood = new SingleLayoutHelper();
-        singleLayoutHelpergood.setItemCount(1);
-        singleLayoutHelpergood.setAspectRatio(6);
-        singleLayoutHelpergood.setMarginTop(6);
-        homeTopicImgMadapter = new HomeTopicImgMadapter(getActivity(), topiclist, singleLayoutHelpergood);
+        ColumnLayoutHelper columnLayoutHelpertopic = new ColumnLayoutHelper();
+        columnLayoutHelpertopic.setItemCount(1);
+        columnLayoutHelpertopic.setAspectRatio(2);
+        columnLayoutHelpertopic.setPadding(1, 1, 1, 1);// 设置LayoutHelper的子元素相对LayoutHelper边缘的距离
+        columnLayoutHelpertopic.setMargin(1, 1, 1, 1);// 设置LayoutHelper边缘相对父控件（即RecyclerView）的距离
+        columnLayoutHelpertopic.setAspectRatio(1);// 设置设置布局内每行布局的宽与高的比
+        columnLayoutHelpertopic.setWeights(new float[]{100});// 设置该行每个Item占该行总宽度的比例
+        homeTopicImgRecyclerMadapter = new HomeTopicImgRecyclerMadapter(getActivity(), columnLayoutHelpertopic, topiclist);
+        /*LinearLayoutHelper linearLayoutHelpertopic = new LinearLayoutHelper();
+        linearLayoutHelpertopic.setItemCount(4);// 设置布局里Item个数
+        linearLayoutHelpertopic.setPadding(10,10,10,10);// 设置LayoutHelper的子元素相对LayoutHelper边缘的距离
+        linearLayoutHelpertopic.setMargin(10,10,10,10);// 设置LayoutHelper边缘相对父控件（即RecyclerView）的距离
+        linearLayoutHelpertopic.setBgColor(Color.GRAY);// 设置背景颜色
+        linearLayoutHelpertopic.setAspectRatio(6);// 设置设置布局内每行布局的宽与高的比
+        homeTopicImgRecyclerMadapter = new HomeTopicImgRecyclerMadapter(getActivity(), linearLayoutHselpertopic,topiclist);*/
     }
 
     //人气推荐
     private void hotgoodImg() {
         GridLayoutHelper gridLayoutHelpergood = new GridLayoutHelper(1);
         // 设置布局里Item个数
-        gridLayoutHelpergood.setItemCount(3);
+        gridLayoutHelpergood.setItemCount(4);
         gridLayoutHelpergood.setAutoExpand(true);
         homeHotGoodsImgMadapter = new HomeHotGoodsImgMadapter(getActivity(), hotgoodslist, gridLayoutHelpergood);
     }
@@ -316,7 +291,6 @@ public class HomeFragment extends BaseHomeFragment<HomePresenter> implements Hom
         String text = "人气推荐";
         homeHotGoodsTextMadapter = new HomeHotGoodsTextMadapter(getActivity(), hotgoodslist, text, singleLayoutHelpergood);
     }
-
 
     //周一周四·新品首发
     //good - text
@@ -425,10 +399,10 @@ public class HomeFragment extends BaseHomeFragment<HomePresenter> implements Hom
 
         delegateAdapter.addAdapter(homeHotGoodsImgMadapter);
 
-        //delegateAdapter.addAdapter(homeTopicTextMadapter);
+        delegateAdapter.addAdapter(homeTopicTextMadapter);
 
-        //delegateAdapter.addAdapter(homeTopicImgMadapter);
-        //居家
+        delegateAdapter.addAdapter(homeTopicImgRecyclerMadapter);
+        /*//居家
         delegateAdapter.addAdapter(homeHouseTextMadapter);
         delegateAdapter.addAdapter(homeHouseMadapter);
         //餐厨 kitchen
@@ -445,8 +419,8 @@ public class HomeFragment extends BaseHomeFragment<HomePresenter> implements Hom
         delegateAdapter.addAdapter(homeClothingMadapter);
         //婴童 bady
         delegateAdapter.addAdapter(homeBadyTextMadapter);
-        delegateAdapter.addAdapter(homeBadyMadapter);
-
+        delegateAdapter.addAdapter(homeBadyMadapter);*/
+        delegateAdapter.addAdapter(homeHouseMadapter);
         //布局管理器
         mViewHomeRv.setLayoutManager(virtualLayoutManager);
         //绑定适配器
@@ -485,11 +459,12 @@ public class HomeFragment extends BaseHomeFragment<HomePresenter> implements Hom
 
             List<HomeBannerBean.DataBean.TopicListBean> topicList = bean.getData().getTopicList();
             topiclist.addAll(topicList);
-            //homeTopicTextMadapter.notifyDataSetChanged();
-            //homeTopicImgMadapter.notifyDataSetChanged();
+            homeTopicTextMadapter.notifyDataSetChanged();
+            homeTopicImgRecyclerMadapter.notifyDataSetChanged();
 
-            //List<HomeBannerBean.DataBean.CategoryListBean> categoryList = bean.getData().getCategoryList().get(1);
-
+            List<HomeBannerBean.DataBean.CategoryListBean> categoryList = bean.getData().getCategoryList();
+            houselist.addAll(categoryList);
+            homeHouseMadapter.notifyDataSetChanged();
 
         }
     }

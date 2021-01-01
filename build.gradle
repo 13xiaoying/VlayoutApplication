@@ -2,8 +2,8 @@
 buildscript {
     repositories {
         google()
-        //jcenter()
-        maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }//解决以下下问题（jcenter bad gateway 502）
+        jcenter()
+        //maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }//解决以下下问题（jcenter bad gateway 502）
     }
     dependencies {
         classpath "com.android.tools.build:gradle:4.0.1"
