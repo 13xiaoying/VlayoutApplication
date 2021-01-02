@@ -32,7 +32,7 @@ public class AlbumFragment extends Fragment {
 
     private void initDate() {
         list = new ArrayList<>();
-        list.addAll(new )
+        list.add(new TabFragment());
 
         mAlbumOutTl.setupWithViewPager(mAlbumGerVp);
 
