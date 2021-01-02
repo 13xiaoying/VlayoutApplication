@@ -30,7 +30,7 @@
             android:layout_weight="1"
             android:button="@null"
             android:checked="true"
-            android:drawableTop="@drawable/item_onclick1"
+            android:drawableTop="@drawable/item_onclick4"
             android:gravity="center"
             android:text="首页"
             android:textColor="@drawable/item_color" />
@@ -41,7 +41,7 @@
             android:layout_height="50dp"
             android:layout_weight="1"
             android:button="@null"
-            android:drawableTop="@drawable/item_onclick2"
+            android:drawableTop="@drawable/item_onclick5"
             android:gravity="center"
             android:text="专题"
             android:textColor="@drawable/item_color" />
@@ -63,7 +63,7 @@
             android:layout_height="50dp"
             android:layout_weight="1"
             android:button="@null"
-            android:drawableTop="@drawable/item_onclick4"
+            android:drawableTop="@drawable/item_onclick2"
             android:gravity="center"
             android:text="购物车"
             android:textColor="@drawable/item_color" />
@@ -74,7 +74,7 @@
             android:layout_height="50dp"
             android:layout_weight="1"
             android:button="@null"
-            android:drawableTop="@drawable/item_onclick5"
+            android:drawableTop="@drawable/item_onclick1"
             android:gravity="center"
             android:text="我的"
             android:textColor="@drawable/item_color" />

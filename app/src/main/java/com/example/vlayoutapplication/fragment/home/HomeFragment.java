@@ -16,7 +16,7 @@ import com.alibaba.android.vlayout.layout.GridLayoutHelper;
 import com.alibaba.android.vlayout.layout.LinearLayoutHelper;
 import com.alibaba.android.vlayout.layout.SingleLayoutHelper;
 import com.example.vlayoutapplication.R;
-import com.example.vlayoutapplication.base.BaseHomeFragment;
+import com.example.vlayoutapplication.base.BaseFragment;
 import com.example.vlayoutapplication.bean.HomeBannerBean;
 import com.example.vlayoutapplication.contract.HomeContract;
 import com.example.vlayoutapplication.homemadapter.HomeAlbumMadapter;
@@ -41,7 +41,7 @@ import com.example.vlayoutapplication.presenter.HomePresenter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HomeFragment extends BaseHomeFragment<HomePresenter> implements HomeContract.CHomeView {
+public class HomeFragment extends BaseFragment<HomePresenter> implements HomeContract.CHomeView {
     private ImageView mMainImgIv;
     private TextView mMainTextTv;
     private LinearLayout mHomeOutLl;

@@ -54,6 +54,7 @@ public class MainActivity extends BaseMainActivity<HomePresenter> implements Vie
     @Override
     public void initDate() {
         presenter.Result();
+        presenter.Result();
         homeFragment = new HomeFragment();
         albumFragment = new AlbumFragment();
         myFragment = new MyFragment();
@@ -118,17 +119,17 @@ public class MainActivity extends BaseMainActivity<HomePresenter> implements Vie
                 break;
             case R.id.button_two:
                 manager.beginTransaction()
-                        .show(albumFragment)
+                        .show(sortFragment)
                         .hide(homeFragment)
-                        .hide(sortFragment)
+                        .hide(albumFragment)
                         .hide(shoppingFragment)
                         .hide(myFragment)
                         .commit();
                 break;
             case R.id.button_three:
                 manager.beginTransaction()
-                        .show(sortFragment)
-                        .hide(albumFragment)
+                        .show(albumFragment)
+                        .hide(sortFragment)
                         .hide(homeFragment)
                         .hide(shoppingFragment)
                         .hide(myFragment)

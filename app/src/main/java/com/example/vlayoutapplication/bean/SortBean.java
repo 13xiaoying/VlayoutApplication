@@ -104,7 +104,7 @@ public class SortBean {
 
             private int id;
             private String title;
-            private int price_info;
+            private float price_info;
             private String scene_pic_url;
             private String subtitle;
 
@@ -124,11 +124,11 @@ public class SortBean {
                 this.title = title;
             }
 
-            public int getPrice_info() {
+            public float getPrice_info() {
                 return price_info;
             }
 
-            public void setPrice_info(int price_info) {
+            public void setPrice_info(float price_info) {
                 this.price_info = price_info;
             }
 

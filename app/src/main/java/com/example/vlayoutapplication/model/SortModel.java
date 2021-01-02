@@ -7,14 +7,13 @@ import com.example.vlayoutapplication.contract.HomeContract;
 import com.example.vlayoutapplication.contract.SortContract;
 import com.example.vlayoutapplication.util.net.HomeRetrofitUrils;
 import com.example.vlayoutapplication.util.net.IneterCallBack;
+import com.example.vlayoutapplication.util.net.SortRetrofitUrils;
 import com.example.vlayoutapplication.util.net.UrlContstant;
 
 public class SortModel extends BaseModel implements SortContract.CSortModel{
 
     @Override
-    public void getData(IneterCallBack<SortBean> callBack) {
-        //网络请求
-        HomeRetrofitUrils.getInstance().get(UrlContstant.sorturl,callBack);
-        //RetrofitUrils.getInstance().post(url,callBack);
+    public void getData(int id, IneterCallBack<SortBean> callBack) {
+        SortRetrofitUrils.getInstance().get(UrlContstant.sorturl+"list?page="+id+"&size=10",callBack);
     }
 }

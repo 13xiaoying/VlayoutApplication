@@ -8,11 +8,11 @@ import com.example.vlayoutapplication.util.net.IneterCallBack;
 
 public class SortContract {
     public interface CSortModel extends IBaseModel {
-         void getData(IneterCallBack<SortBean> callBack);
+         void getData(int id,IneterCallBack<SortBean> callBack);
     }
 
     public interface CSortPresenter {
-        void Result();
+        void Result(int id);
     }
 
     public interface CSortView extends BaseView{

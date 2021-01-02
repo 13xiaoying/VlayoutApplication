@@ -11,12 +11,12 @@ import com.example.vlayoutapplication.contract.SortContract;
 import com.example.vlayoutapplication.model.HomeModel;
 import com.example.vlayoutapplication.model.SortModel;
 import com.example.vlayoutapplication.util.net.IneterCallBack;
+import com.example.vlayoutapplication.util.net.UrlContstant;
 
 public class SortPresenter extends BasePresenter<SortContract.CSortView, SortModel> implements SortContract.CSortPresenter, BaseView {
-
     @Override
-    public void Result() {
-        model.getData(new IneterCallBack<SortBean>() {
+    public void Result(int id) {
+        model.getData(id,new IneterCallBack<SortBean>() {
             @Override
             public void onInit(SortBean a) {
                 iView.onInit(a);
@@ -24,7 +24,7 @@ public class SortPresenter extends BasePresenter<SortContract.CSortView, SortMod
 
             @Override
             public void onError(String error) {
-                Log.i(TAG, "onError: sort错误信息"+error);
+
             }
         });
     }
